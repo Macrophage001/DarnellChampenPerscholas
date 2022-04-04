@@ -1,0 +1,14 @@
+.box
+{
+    background-color: black;
+    border: 2px solid black;
+    height: 42px;
+    margin-bottom: 12px;
+}
+
+#box
+{
+    background-color: green;
+    border: 2px solid black;
+    height: 42px;
+}
