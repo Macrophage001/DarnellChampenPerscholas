@@ -1,0 +1,223 @@
+*
+{
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+}
+:root
+{
+	--header-color: #342E37;
+	--background-color: #FAFFFD;
+}
+
+body
+{
+	background-color: #FAFFFD;
+}
+nav
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+a
+{
+	text-decoration: none;
+	color: var(--background-color);
+	font-size: 18px;
+}
+h1, h2, h3, p
+{
+	color: #425158;
+}
+h1, h2, h3
+{
+	margin: auto;
+	padding: 8px;
+	text-align: center;
+	text-transform: uppercase;
+}
+p
+{
+	font-size: 16px;
+	padding: 8px;
+}
+
+/* ------ Projects Table ------ */
+table
+{
+	background-color: #bfceda;
+}
+td, th
+{
+	background-color: #dce3e9;
+	padding: 4px;
+}
+th
+{
+	font-weight: bold;
+}
+ul
+{
+	text-transform: capitalize;
+	padding: 12px;
+}
+#projects-table
+{
+	margin: auto;
+	width: 75%;
+}
+
+/* ----- Interesting Ideas Form ----- */
+form
+{
+	font-weight: bold;
+	padding: 8px;
+}
+form h3
+{
+	text-align: left;
+	padding: 0;
+	margin-bottom: 8px;
+}
+form input
+{
+	position: static;
+	width: auto;
+	padding: 4px;
+	margin-bottom: 8px;
+
+	font-size: 16px;
+	font-weight: bold;
+}
+form textarea
+{
+	display: block;
+	width: 100%;
+	border-radius: 5px;
+
+	font-size: 16px;
+	font-weight: bold;
+}
+form input[type=button]
+{
+	display: block;
+	color: black;
+	background-color: transparent;
+	padding: 5px;
+	width: 25%;
+	border-radius: 5px;
+}
+form input[type=button]:hover, form input[type=text]:focus
+{
+	background-color: #dce3e9;
+}
+
+/* ------ Navigation Bar ------ */
+.nav-links
+{
+    flex: 1;
+    text-align: center;
+	margin-top: 8px;
+}
+.nav-links ul li
+{
+    list-style: none;
+    display: inline-block;
+    padding: 8px;
+    position: relative;
+}
+.nav-links ul li a:hover
+{
+	color: #1c2d35;
+	transition: 0.1s;
+}
+
+/* ------ Decoration ------ */
+.body-block
+{
+	background-color: #342E37;
+	padding: 22px;
+}
+.body-block.header h1,
+.body-block.header h2,
+.body-block.header h3,
+.body-block.header p 
+{
+	color: #FAFFFD;
+}
+
+.body-block p
+{
+	text-align: center;
+	font-style: italic;
+}
+.body-block-data
+{
+	display: flex;
+}
+.body-block-data img
+{
+	flex: 1;
+	max-width: 50%;
+	max-height: 85%;
+	margin: auto;
+	padding-right: 4px;
+}
+.body-block-data iframe
+{
+	flex: 50%;
+	width: 50%;
+}
+
+section
+{
+	max-width: 60rem;
+	margin: auto;
+}
+
+#intro
+{
+	font-style: italic;
+}
+
+.center
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 25%;
+}
+.project
+{
+	background-color: #E5D6C9;
+	padding: 12px;
+	margin-bottom: 6px;
+}
+
+.project iframe
+{
+	min-height: 315px;
+}
+
+.social-link
+{
+	position: absolute;
+}
+.social-link img
+{
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	border: 4px solid #c3d4e2;
+}
+
+.social-logo
+{
+	background: white;
+	position:absolute;
+	left: 65%;
+	bottom: 0%;
+	max-width: 20px;
+	max-height: 20px;
+}

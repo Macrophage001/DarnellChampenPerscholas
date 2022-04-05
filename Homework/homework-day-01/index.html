@@ -1,16 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Homework Day 01</title>
-</head>
-<body>
-    <div class="box">
-    </div>
-    <div id="box">
-    </div>
-</body>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+	</head>
+	<body>
+		<div class="body-block header">
+			<a class="social-link" href="https://github.com/Macrophage001">
+				<img src="https://avatars.githubusercontent.com/u/331135?s=400&v=4" width="45" height="45">
+				<img src="images\GitHub-Mark-120px-plus.png" alt="" class="social-logo">
+			</a>
+			<h2>Darnell Champen</h2>
+			<h3>Home</h3>
+			<hr>
+			<nav>
+				<div class="nav-links" id="nav-links-id">
+					<ul>
+						<li><a href="index.html">Home</a></li>
+						<li><a href="about.html">About Me</a></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+
+		<section>
+			<p>Hi and welcome to my page. My name is Darnell Champen and I am an aspiring software/game developer. Thanks for stopping by!</p>
+			
+			<h3>Some of my favorite past-times</h3>
+			<ul>
+				<li>Survival/RPG Games (Skyrim, Minecraft, Valheim, No Man's Sky, etc...)</li>
+				<li>Chinese Light-Fantasy Novels</li>
+				<li>Cooking</li>
+			</ul>
+
+			<h3>My most recent projects</h3>
+			<table id="projects-table">
+				<tr>
+					<th>Project</th>
+					<th>Description</th>
+					<th>Status</th>
+					<th>Link</th>
+				</tr>
+				<tr>
+					<td class="data-header">Universe Prototype</td>
+					<td><i>A universe sim with fully destructible planets for an RPG Fantasy game I'm working on.</i></td>
+					<td>In Development</td>
+					<td>N/A</td>
+				</tr>
+				<tr>
+					<td class="data-header">Guild Inc.</td>
+					<td>An Idle Game based on growing a guild on remote islands by gathering treasures, making money, and expanding your operations by travelling to new islands.</td>
+					<td>Complete</td>
+					<td><a href="pages/about.html#projectUniversePrototype">Link</a></td>
+				</tr>
+				<tr>
+					<td class="data-header">Circuit Bricker</td>
+					<td>A light-show of a brick breaker game taking place inside a machine with a fragmented operating system and hostile glitches that the player must destroy in order to bring back order to the system</td>
+					<td>Complete</td>
+					<td><a href="pages/about.html#projectCircuitBricker">Link</a></td>
+				</tr>
+			</table>
+		</section>
+
+		<section>
+			<form>
+				<h3>Interesting mod / Game Ideas</h3>
+				<input type="text" name="firstName" placeholder="First Name"></input> <br>
+				<input type="text" name="lastName" placeholder="Last Name"></input> <br>
+				<textarea name="" id="interesting-ideas" r="30" rows="10" placeholder="Leave an interesting idea for a game or mod here..."></textarea><br>
+				<input type="button" name="submit" value="Submit">
+			</form>
+		</section>
+	</body>
 </html>
