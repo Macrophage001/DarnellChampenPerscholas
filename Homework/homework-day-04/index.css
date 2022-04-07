@@ -1,0 +1,36 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+body
+{
+    background-color: #39393A;
+}
+
+.header
+{
+    background: #7A8B99;
+    width: 100%;
+    height: 42px;
+    padding: 24px;
+}
+.header h1,
+.header h3
+{
+    color: #011C27;
+}
+
+.grocery-items
+{
+    display: block;
+}
+.grocery-items p
+{
+    color: white;
+}
+.grocery-items > *
+{
+    padding: 0.375rem;
+}
