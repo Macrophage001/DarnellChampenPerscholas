@@ -23,6 +23,8 @@ let cartCount = document.getElementById('cart');
 let cartItemsDisplay = document.getElementById('cart-display');
 let checkoutDisplay = document.getElementById('checkout-id')
 
+
+// Will display all of the items you've currently 'bought' and the current total price.
 const updateCheckoutDisplay = () => {
     let newElements = []
     let totalPrice = 0;
@@ -70,14 +72,21 @@ const addItemToShoppingCart = (index, itemIndex) => {
 };
 
 const removeItemFromShoppingCart = (index, itemIndex) => {
+    // Doesn't make sense to try to remove an item from an empty cart
     if (shoppingCart.length > 0)
     {
-        // let grocerySection = Store[index];
-        // let storeItemName = grocerySection[itemIndex].name;
-        // let cartItem = shoppingCart.find((shoppingCartItemName) => shoppingCartItemName === storeItemName);
-
-        let cartItem = shoppingCart.find((i) => Store[index][itemIndex].name === i.name);
-        
+        let cartItem = undefined;
+        let grocerySection = Store[index];
+        let groceryItem = grocerySection[itemIndex];
+        for (let i = 0; i < shoppingCart.length; i++)
+        {
+            let currentShoppingCartItem = shoppingCart[i];
+            if (currentShoppingCartItem === groceryItem)
+            {
+                cartItem = currentShoppingCartItem;
+                break;
+            }
+        }
         console.log(cartItem);
 
         if (cartItem !== undefined)
@@ -86,10 +95,6 @@ const removeItemFromShoppingCart = (index, itemIndex) => {
             shoppingCart.splice(shoppingCart.indexOf(cartItem), 1);
             console.log(shoppingCart);
             cartCount.innerHTML = `Cart: ${shoppingCart.length}`
-        }
-        else
-        {
-            window.alert("The item: " + cartItem.name + " is not in your cart")
         }
 
         updateCheckoutDisplay();
