@@ -1,0 +1,110 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    /* border: 1px dashed white; */
+    /* background: rgba(0, 0, 0, 0.1); */
+}
+nav
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+:root
+{
+    --primary-color: #7A8B99;
+    --secondary-color: #white;
+    --hover-color: #647787;
+    --focus-color: #647787;
+}
+
+.header
+{
+    background: #7A8B99;
+}
+.header h1
+{
+    padding: 1rem;
+}
+.header h1,
+.header h3
+{
+    color: #011C27;
+}
+.nav-links
+{
+    flex: 1;
+    text-align: center;
+}
+.nav-links ul li
+{
+    display: inline-block;
+    list-style: none;
+    padding: 12px;
+    margin: 0 1rem;
+}
+.nav-links ul li a
+{
+    text-decoration: none;
+    color: #011C27;
+}
+.nav-links ul li:hover
+{
+    transition: 250ms ease;
+    background-color: var(--hover-color);
+}
+.nav-links ul li:focus
+{
+    background-color: var(--focus-color);
+}
+
+/* index.html Specific CSS*/
+.introduction 
+{
+    text-align: center;
+    padding: 1rem;
+}
+.introduction h3,
+.introduction p
+{
+    padding: 1rem;
+}
+/* index.html Specific CSS END */
+
+.grocery-items
+{
+    display: block;
+}
+.grocery-items .item
+{
+    display: flex;
+}
+.grocery-items .item *
+{
+    flex: 1;
+    padding: 0.125rem;
+}
+.grocery-items p
+{
+    color: black;
+}
+.grocery-items > *
+{
+    padding: 0.375rem;
+}
+
+.checkout
+{
+    display: block;
+    margin: 1rem 0;
+}
+.checkout div
+{
+    display: flex;
+}
+.checkout div *
+{
+    flex: 1;
+    padding: 0.250rem;
+}
