@@ -32,6 +32,7 @@ const updateCheckoutDisplay = () => {
         let shoppingCartItem = shoppingCart[i];
         let shoppingCartItemName = shoppingCartItem.name;
         let shoppingCartItemPrice = shoppingCartItem.price;
+        let shoppingCartItemCount = shoppingCartItem.count;
 
         totalPrice += shoppingCartItemPrice;
 

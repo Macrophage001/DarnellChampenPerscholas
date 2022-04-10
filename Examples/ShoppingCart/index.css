@@ -35,11 +35,10 @@ nav
 .nav-links
 {
     flex: 1;
-    text-align: center;
+    text-align: right;
 }
 .nav-links ul li
 {
-    display: inline-block;
     list-style: none;
     padding: 12px;
     margin: 0 1rem;
@@ -68,36 +67,32 @@ nav
 .introduction h3,
 .introduction p
 {
-    padding: 1rem;
+    padding: 1em;
 }
-/* index.html Specific CSS END */
 
-.grocery-items
-{
-    display: block;
-}
+/* index.html Specific CSS END */
 .grocery-items .item
 {
     display: flex;
 }
+.grocery-items > *
+{
+    padding: 0.375em;
+}
 .grocery-items .item *
 {
     flex: 1;
-    padding: 0.125rem;
+    padding: 0.125em;
+    margin: 0 0.250em;
 }
 .grocery-items p
 {
     color: black;
 }
-.grocery-items > *
-{
-    padding: 0.375rem;
-}
 
 .checkout
 {
-    display: block;
-    margin: 1rem 0;
+    margin: 0.125em 0;
 }
 .checkout div
 {
@@ -106,5 +101,5 @@ nav
 .checkout div *
 {
     flex: 1;
-    padding: 0.250rem;
+    padding: 0 0.125em;
 }
