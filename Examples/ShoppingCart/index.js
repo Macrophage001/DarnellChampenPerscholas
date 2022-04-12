@@ -1,53 +1,53 @@
 let Store = {
     Produce: [
         {name: 'Carrots', price: 12},
-        {name: 'Avocadoes', price: 8},
+        {name: 'Avocados', price: 8},
         {name: 'Broccoli', price: 4},
         {name: 'Potatoes', price: 10},
         {name: 'Leeks', price: 10}
     ],
     Furniture: [
-        {name: "Chair", price: 24},
-        {name: "Table", price: 18},
-        {name: "Vase", price: 12}
+        {name: 'Chair', price: 24},
+        {name: 'Table', price: 18},
+        {name: 'Vase', price: 12}
     ],
-    Meat: [
-        {name: "Steak", price: 21},
-        {name: "Lamb", price: 19},
-        {name: "Pork", price: 32}
+    Meats: [
+        {name: 'Steak', price: 21},
+        {name: 'Lamb', price: 19},
+        {name: 'Pork', price: 32}
     ]
 }
 
 let shoppingCart = [];
-let cartCount = document.getElementById('cart'); // The Cart: # at the top of the screen.
-let checkoutDisplay = document.getElementById('checkout-id')
 
+let cartCount = document.getElementById('cart');
+let checkoutDisplay = document.getElementById('checkout-id');
 
-// Will display all of the items you've currently 'bought' and the current total price.
 const updateCheckoutDisplay = () => {
-    let newHTMLElements = []
+    let newHTMLElements = [];
     let totalPrice = 0;
+
     for (let i = 0; i < shoppingCart.length; i++)
     {
         let shoppingCartItem = shoppingCart[i];
         let shoppingCartItemName = shoppingCartItem.name;
         let shoppingCartItemPrice = shoppingCartItem.price;
 
-        totalPrice += shoppingCartItemPrice;
+        totalPrice = totalPrice + shoppingCartItemPrice;
 
-        let htmlElement = "<div class='checkout-item'><p>" + shoppingCartItemName +  "</p><p>$" + shoppingCartItemPrice + "</p></div><hr><br>";
+        let htmlElement = "<div class='checkout-item'><p>" + shoppingCartItemName + "</p><p>" + shoppingCartItemPrice + "</p></div><hr><br>";
         newHTMLElements[i] = htmlElement;
     }
 
-    checkoutDisplay.innerHTML = ""
+    checkoutDisplay.innerHTML = "";
     for (let i = 0; i < newHTMLElements.length; i++)
     {
         checkoutDisplay.innerHTML += newHTMLElements[i] + '\n';
     }
 
-    let totalPriceCheckoutElement = "<div class='checkout-item'><h3>Total</h3><h3>$" + totalPrice + "</h3></div>";
+    let totalPriceCheckoutElement = "<div class='checkout-item'><h3>Total</h3><h4>" + totalPrice + "</h4></div>";
     checkoutDisplay.innerHTML += totalPriceCheckoutElement;
-}
+};
 
 const addItemToShoppingCart = (grocerySectionName, itemIndex) => {
     let grocerySection = Store[grocerySectionName];
@@ -57,46 +57,52 @@ const addItemToShoppingCart = (grocerySectionName, itemIndex) => {
 
     if (storeItem !== undefined)
     {
-        console.log("Found: " + storeItem.name + ", adding to cart");
+        console.log("Found: " + storeItem.name + ", adding to cart.");
 
-        shoppingCart[shoppingCart.length] = storeItem;
-        
+        let shoppingCartLength = shoppingCart.length;
+        shoppingCart[shoppingCartLength] = storeItem;
+
         console.log(shoppingCart);
-        
-        cartCount.innerHTML = "Cart: " + shoppingCart.length + ", Last Added Item: " + storeItem.name;
+
+        cartCount.innerHTML = "Cart: " + shoppingCartLength + ", Last Added Item: " + storeItem.name;
     }
     else
     {
-        console.log("Should not get to this point but just in case...hi how are you? =D")
+        console.log("Should not get to this point but just in case...hi how are ya =D");
     }
 
     updateCheckoutDisplay();
 };
 
 const removeItemFromShoppingCart = (grocerySectionName, itemIndex) => {
-    // Doesn't make sense to try to remove an item from an empty cart
     if (shoppingCart.length > 0)
     {
         let cartItem = undefined;
         let grocerySection = Store[grocerySectionName];
-        let groceryItem = grocerySection[itemIndex];
+        let storeItem = grocerySection[itemIndex];
+
         for (let i = 0; i < shoppingCart.length; i++)
         {
             let currentShoppingCartItem = shoppingCart[i];
-            if (currentShoppingCartItem === groceryItem)
+            if (currentShoppingCartItem === storeItem)
             {
                 cartItem = currentShoppingCartItem;
                 break;
             }
         }
+
         console.log(cartItem);
 
         if (cartItem !== undefined)
         {
-            console.log("Found " + cartItem.name + ", removing from cart");
-            shoppingCart.splice(shoppingCart.indexOf(cartItem), 1);
+            console.log("Found: " + cartItem.name + ", removing from cart.");
+
+            let itemIdentificationNumber = shoppingCart.indexOf(cartItem);
+            shoppingCart.splice(itemIdentificationNumber, 1);
+
             console.log(shoppingCart);
-            cartCount.innerHTML = "Cart: " + shoppingCart.length
+
+            cartCount.innerHTML = "Cart: " + shoppingCart.length;
         }
 
         updateCheckoutDisplay();

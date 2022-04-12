@@ -8,12 +8,12 @@
     <title>Grocery Store</title>
 </head>
 <body>
-    <!-- HEADER  -->
+    <!-- HEADER -->
     <div class="header">
         <h1>Grocery Store</h1>
         <hr>
         <nav>
-            <div class="nav-links" id="nav-links-id">
+            <div class="nav-links">
                 <ul>
                     <li id="cart">Cart: 0</li>
                 </ul>
@@ -23,8 +23,8 @@
 
     <!-- BODY -->
     <div class="introduction">
-        <h3>Hello and Welcome to the Grocery Store.</h3>
-        <p>Please make a selection from any one of our fine categories above</p>
+        <h3>Hello and Welcome to the Grocery Store</h3>
+        <p>Please make a selection from any one of our fine categories below.</p>
     </div>
     <div class="grocery-items">
         <h3>Produce</h3>
@@ -32,61 +32,54 @@
         <div class="item">
             <p>Carrots</p>
             <button onclick="addItemToShoppingCart('Produce', 0)">Add</button>
-            <button onclick="removeItemFromShoppingCart('Produce', 0)">Subtract</button>
+            <button onclick="removeItemFromShoppingCart('Produce', 0)">Remove</button>
         </div>
         <div class="item">
             <p>Avocados</p>
             <button onclick="addItemToShoppingCart('Produce', 1)">Add</button>
-            <button onclick="removeItemFromShoppingCart('Produce', 1)">Subtract</button>
+            <button onclick="removeItemFromShoppingCart('Produce', 1)">Remove</button>
         </div>
         <div class="item">
             <p>Broccoli</p>
             <button onclick="addItemToShoppingCart('Produce', 2)">Add</button>
-            <button onclick="removeItemFromShoppingCart('Produce', 2)">Subtract</button>
+            <button onclick="removeItemFromShoppingCart('Produce', 2)">Remove</button>
         </div>
         <div class="item">
             <p>Potatoes</p>
             <button onclick="addItemToShoppingCart('Produce', 3)">Add</button>
-            <button onclick="removeItemFromShoppingCart('Produce', 3)">Subtract</button>
+            <button onclick="removeItemFromShoppingCart('Produce', 3)">Remove</button>
         </div>
         <div class="item">
             <p>Leeks</p>
             <button onclick="addItemToShoppingCart('Produce', 4)">Add</button>
-            <button onclick="removeItemFromShoppingCart('Produce', 4)">Subtract</button>
+            <button onclick="removeItemFromShoppingCart('Produce', 4)">Remove</button>
         </div>
     </div>
-    <hr>
-    <br>
     <div class="grocery-items">
         <h3>Furniture</h3>
         <br>
         <div class="item">
             <p>Chair</p>
             <button onclick="addItemToShoppingCart('Furniture', 0)">Add</button>
-            <button onclick="removeItemFromShoppingCart('Furniture', 0)">Subtract</button>
+            <button onclick="removeItemFromShoppingCart('Furniture', 0)">Remove</button>
         </div>
         <div class="item">
             <p>Table</p>
             <button onclick="addItemToShoppingCart('Furniture', 1)">Add</button>
-            <button onclick="removeItemFromShoppingCart('Furniture', 1)">Subtract</button>
+            <button onclick="removeItemFromShoppingCart('Furniture', 1)">Remove</button>
         </div>
         <div class="item">
             <p>Vase</p>
             <button onclick="addItemToShoppingCart('Furniture', 2)">Add</button>
-            <button onclick="removeItemFromShoppingCart('Furniture', 2)">Subtract</button>
+            <button onclick="removeItemFromShoppingCart('Furniture', 2)">Remove</button>
         </div>
     </div>
-
     <div class="checkout" id="checkout-id">
-        <!-- I use the 'checkout-item' class here for the formatting on the website, this is not a checkout-item like the others -->
         <div class="checkout-item">
             <h3>Total</h3>
             <h4>$0.00</h4>
         </div>
     </div>
-
-    <!-- BODY END -->
-
     <script src="index.js"></script>
 </body>
 </html>
