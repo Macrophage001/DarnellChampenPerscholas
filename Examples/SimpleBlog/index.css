@@ -100,10 +100,14 @@ a {
 .article-preview:hover {
     transition: 250ms ease;
     transform: scale(101%);
-    z-index: 2;
 }
 
 @media (max-width: 600px) {
+
+    * {
+        font-size: 0.95em;
+    }
+
     .header {
         width: 85%;
     }

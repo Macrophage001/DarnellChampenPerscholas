@@ -1,7 +1,3 @@
-const params = new Proxy(new URLSearchParams(window.location.search), {
-    get: (searchParams, prop) => searchParams.get(prop)
-});
-
 const articles = [
     {
         title: "The Many Varieties of Rocks",
@@ -45,9 +41,12 @@ let articleTemplate = (article_title, article_content) => `
         </div>
 `
 
+const params = new Proxy(new URLSearchParams(window.location.search), {
+    get: (searchParams, prop) => searchParams.get(prop)
+});
+
 window.onload = (e) => {
-    let article_id = params.article_id;
-    let article = articles[article_id];
+    let article = articles[params.article_id];
 
     articleSection.innerHTML = articleTemplate(article.title, article.content);
 }
