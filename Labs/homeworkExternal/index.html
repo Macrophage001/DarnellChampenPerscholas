@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+    <div id="controlos">
+            <input id="txtTempo" type="text" value="10" size="4" maxlength="4"><button id="btnStart">Start</button>
+    </div>
+          
+    <!-- <div id="clock" class="blue" >00:00</div>  -->
+    <div id="clock" class="blue">
+        <form class="inlineClock" action="javascript:void(0);">
+            <!-- <input id="clock" class="blue" type="text" placeholder="00:00"></input> -->
+            <input type="text" placeholder="00" id="clock-minute"></input>
+            <h3>:</h3>
+            <input type="text" placeholder="00" id="clock-seconds"></input>
+            <button onclick="botaoClicked()" id="clockBtn" type="submit"></button>
+        </form>
+    </div>
+        
+    <!-- onclick="editPlace()" -->
+        <script src="app.js" async defer></script>
+    </body>
+</html>

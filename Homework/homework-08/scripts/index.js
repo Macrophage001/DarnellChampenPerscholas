@@ -10,10 +10,6 @@ const isColorChangeActive = true;
 let seconds = 0;
 let minutes = 0;
 
-const lerp = (v0, v1, t) => {
-    return v0*(1-t)+v1*t
-}
-
 const changeColor = (element) => {
     if (isColorChangeActive && ( document.activeElement !== inlineMinuteInput && document.activeElement !== inlineSecondInput )) {
         let randomIndex = Math.ceil(Math.random() * 5) - 1;
@@ -25,7 +21,11 @@ let timerInterval;
 
 const startTimer = () => {
     if (inlineMinuteInput === document.activeElement) {
+        let tempMinutes = Math.floor(inlineMinuteInput.value);
         inlineSecondInput.focus();
+        inlineMinuteInput.value = (tempMinutes < 10 
+            ? `0${tempMinutes}`
+            : tempMinutes);
     }
     else
     {
@@ -38,7 +38,6 @@ const startTimer = () => {
         minutes = 0;
 
         timerInterval = setInterval(() => updateTimer(requiredTimeElapsed), 1000);
-
     }
 }
 
@@ -50,8 +49,6 @@ const stopTimer = () => {
     clearInterval(timerInterval);
     resetTimer();
 }
-
-const formattedTime = (seconds, minutes) => `${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
 
 const updateTimer = (requiredTimeElapsed) => {
     let totalTimeElapsed = seconds + minutes * 60;
