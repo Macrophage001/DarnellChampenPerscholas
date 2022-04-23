@@ -44,6 +44,7 @@ body h2 {
 .complaints-search-output {
     display: flex;
     flex-direction: column;
+    margin-top: 0.125rem;
 }
 .complaint {
     display: flex;
@@ -52,8 +53,11 @@ body h2 {
 
 .complaint-title {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    margin: auto;
+    width: 26rem;
 }
+
 .complaint-title button {
     cursor: pointer;
     background-color: #730000;
@@ -67,8 +71,13 @@ body h2 {
 }
 .complaint-response {
     display: none;
+    background-color: #dddddd;
+    padding: 0.125rem;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
     text-align: left;
-    margin-left: 6.5rem;
+    width: 26rem;
+    margin: auto;
 }
 
 .active {

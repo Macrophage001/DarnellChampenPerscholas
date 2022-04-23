@@ -1,9 +1,16 @@
-// const numComplaintsInput = document.getElementById('num-complaints-input');
 const numComplaintsInput = document.querySelector('.complaints-search-bar input');
 const complaintsSearchOutput = document.querySelector('.complaints-search-output');
 
+const fetchedData = [];
+
+window.onload = () => {
+    fetch(' https://data.cityofnewyork.us/resource/erm2-nwe9.json')
+        .then((resp) => resp.json())
+        .then((json) => fetchedData = json);
+}
+
 const complaintTemplate = (complaintTitle, response, index) =>
-`
+    `
             <div class="complaint">
                 <div class="complaint-title">
                     <h3>${complaintTitle}</h3>
@@ -27,25 +34,25 @@ const toggleResponse = (index) => {
         complaintResponse.classList.add('active');
     }
 }
+
 const lookupComplaint = (borough) => {
     let boroughComplaints = [];
-    console.log('Loading complaints...');
-    console.log('Number of complaints: ' + numComplaintsInput.value);
+    // console.log('Loading complaints...');
+    // console.log('Number of complaints: ' + numComplaintsInput.value);
+
     fetch(' https://data.cityofnewyork.us/resource/erm2-nwe9.json')
         .then((resp) => resp.json())
         .then((json) => {
             let tempBoroughComplaints = json
-            .filter(jsonObject => jsonObject.borough === borough)
-            .map(boroughObject => (
-                { 
-                    complaintTitle: boroughObject.complaint_type, 
-                    response: boroughObject.resolution_description === undefined
-                        ? boroughObject.status 
-                        : boroughObject.resolution_description
-                }
-            ));
-
-            // console.log(tempBoroughComplaints);
+                .filter(jsonObject => jsonObject.borough === borough)
+                .map(boroughObject => (
+                    {
+                        complaintTitle: boroughObject.complaint_type,
+                        response: boroughObject.resolution_description === undefined
+                            ? boroughObject.status
+                            : boroughObject.resolution_description
+                    }
+                ));
 
             if (numComplaintsInput.value === '') {
                 boroughComplaints = tempBoroughComplaints;
@@ -57,12 +64,11 @@ const lookupComplaint = (borough) => {
                     boroughComplaints.push(complaint);
                 }
             }
-            // console.log(boroughComplaints);
         })
         .finally(() => {
             complaintsSearchOutput.innerHTML = '';
 
-            boroughComplaints.forEach( (complaint, index) => {
+            boroughComplaints.forEach((complaint, index) => {
                 let newComplaintDiv = complaintTemplate(complaint.complaintTitle, complaint.response, index);
                 complaintsSearchOutput.innerHTML += newComplaintDiv;
             });

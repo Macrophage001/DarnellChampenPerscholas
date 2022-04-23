@@ -77,10 +77,11 @@ body, html {
     padding: 1rem;
 }
 .top-rated-chef-listing {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
     padding: 0.5rem;
     
-    height: 100%;
+    height: 50%;
 
     background-image: url(../images/chefBackground.jpg);
     background-size: cover;
