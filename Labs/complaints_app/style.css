@@ -46,25 +46,26 @@ body h2 {
     flex-direction: column;
     margin-top: 0.125rem;
 }
+
 .complaint {
     display: flex;
     flex-direction: column;
 }
-
 .complaint-title {
     display: flex;
     justify-content: space-between;
     margin: auto;
     width: 26rem;
 }
-
 .complaint-title button {
     cursor: pointer;
     background-color: #730000;
     color: white;
     font-weight: bold;
+    border: none;
     border-radius: 4px;
-    padding: 0.2rem;
+    margin: 0.025rem 0;
+    padding: 0.3rem;
 }
 .complaint-title button:hover {
     background-color: var(--hover-color);
