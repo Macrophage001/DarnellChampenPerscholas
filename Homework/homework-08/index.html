@@ -18,9 +18,9 @@
             <div class="grid-item" onclick="changeColor(this)">
                 <div class="timer">
                     <form action="javascript:void(0);" class="inline-timer-input">
-                        <input type="text" placeholder="00" id="inline-minute" onfocus="stopTimer()" class="inline-timer-input">
+                        <input type="text" maxlength="2" placeholder="00" id="inline-minute" onfocus="stopTimer()" class="inline-timer-input">
                         <h3>:</h3>
-                        <input type="text" placeholder="00" id="inline-seconds" onfocus="stopTimer()" class="inline-timer-input">
+                        <input type="text" maxlength="2" placeholder="00" id="inline-seconds" onfocus="stopTimer()" class="inline-timer-input">
                         <button onclick="startTimer()" type="submit">Start</button>
                     </form>
                 </div>
