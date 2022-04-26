@@ -1,159 +1,86 @@
-:root {
-    --primary-color: #dfdfdf;
-    --secondary-color: #d6f0f1;
-    --tertiary-color: #238c8f;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-
-    font-family: 'Roboto', sans-serif;
-}
-body {
-    background-color: #dfdfdf;
-}
-
 .hamburger-icon {
     cursor: pointer;
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    margin: 1rem;
-}
-.line {
-    width: 1rem;
-    height: 2px;
-    background-color: #000;
-    margin: 0.125rem;
-}
-
-.navigation-bar-header {
-    display: flex;
-    justify-content: space-between;
-}
-.navigation-bar {
-    background-color: #606060;
-    position: relative;
-    max-width: 8rem;
-    height: 100vh;
+    position: fixed;
     padding: 1rem;
-    left: -100%;
-    box-shadow: 0 0 8px;
-
-    animation: close-nav-bar 350ms ease-in forwards;
-}
-.navigation-bar-active {
-    animation: open-nav-bar 250ms ease forwards;
-}
-.close-icon {
-    cursor: pointer;
-    position: relative;
-    color: #000;
-}
-
-.nav-links ul {
     display: flex;
     flex-direction: column;
 }
-.nav-links ul li {
-    cursor: pointer;
-    list-style: none;
-    margin: 1rem 0;
-    width: 100%;
-    padding: 0.2rem 0;
-    background: transparent;
+.hamburger-icon .line {
+    margin: 0.125rem;
+    width: 1rem;
+    height: 1px;
+    background-color: #111;
 }
-.nav-links ul li::after {
-    display: block;
-    position: absolute;
-    content: '';
-    
+
+.navigation-bar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
     left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 500ms;
+}
+
+.navigation-bar a {
+    padding: 0 1rem;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 300ms;
+}
+.navigation-bar a::after {
+    content: '';
+    display: block;
+    position: relative;
+    left: -10px;
+    transform: translateY(-100%);
     width: 0;
     height: 2rem;
+    background-color: #f1f1f1;
+    opacity: 0;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
 
-    transform: translateY(-20%);
-    
-    background-color: white;
-    
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
-.nav-links ul li:hover::after {
-    transition: 250ms ease;
-    width: 8rem;
-}
-.nav-links ul li:hover a {
-    color: black;
-}
-.nav-links ul li a {
-    position: absolute;
-    z-index: 2;
-    font-size: 1.25rem;
-    text-decoration: none;
-    color: white;
-    font-weight: lighter;
-}
-
-.content {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 0%;
-    padding: 4rem;
     z-index: -1;
 }
-.post {
-    background-color: rgb(245, 245, 245);
-    box-shadow: 6px 6px  8px #cfcece;
-    padding: 3rem;
-    margin: 0.2rem 0;
-    min-height: 12rem;
-    animation: expand-content-size 250ms ease;
+
+.navigation-bar a:hover {
+    color: #111;
 }
-.post h2 {
-    text-align: center;
-    padding: 0.125rem;
-}
-.post p {
-    font-weight: 300;
-    color: black;
-}
-.on-navigation-bar-open {
-    animation: reduce-content-size 250ms ease forwards;
+.navigation-bar a:hover::after {
+    transition: 300ms;
+    width: 9rem;
+    opacity: 1;
 }
 
-@keyframes reduce-content-size {
-    0% {
-        margin-left: 0;
-    }
-    100% {
-        margin-left: 8rem;
-    }
+.navigation-bar .close-btn {
+    cursor: pointer;
+    color: #818181;
+    background: none;
+    border: none;
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+
+    transition: 300ms;
 }
-@keyframes expand-content-size {
-    0% {
-        margin-left: 8rem;
-    }
-    100% {
-        margin-left: 0rem;
-    }
+.navigation-bar .close-btn:hover {
+    color: #f1f1f1;
 }
 
-@keyframes close-nav-bar {
-    0% {
-        left: 0%;
-    }
-    100% {
-        left: -100%;
-    }
+#main {
+    transition: margin-left 500ms;
+    padding: 20px;
 }
-@keyframes open-nav-bar {
-    0% {
-        left: -100%;
-    }
-    100% {
-        left: 0;
-    }
+
+@media screen and (max-height: 450px) {
+    .navigation-bar { padding-top: 15px; }
+    .navigation-bar a { font-size: 18px; }
 }

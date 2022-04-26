@@ -1,18 +1,12 @@
 const posts = document.getElementsByClassName('post');
-const navigationBar = document.querySelector('.navigation-bar');
+const navigationBar = document.getElementById('navigation-bar-id');
 let isMenuVisible = false;
 
 const updateMenuVisibility = () => {
     if (isMenuVisible) {
-        navigationBar.classList.add('navigation-bar-active');
-        for ( let i = 0; i < posts.length; i++ ) {
-            posts[i].classList.add('on-navigation-bar-open');
-        }
+        navigationBar.style.width = '14rem';
     } else {
-        navigationBar.classList.remove('navigation-bar-active');
-        for ( let i = 0; i < posts.length; i++ ) {
-            posts[i].classList.remove('on-navigation-bar-open');
-        }
+        navigationBar.style.width = '0';
     }
 }
 const toggleMenu = () => {
