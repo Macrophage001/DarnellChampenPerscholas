@@ -1,0 +1,120 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    height: 100%;
+    background-color: #f1f1f1;
+}
+h2, h3 {
+    color: #f1f1f1;
+}
+
+.scale-x-down {
+    animation: flip-card-part1 300ms forwards;
+}
+@keyframes flip-card-part1 {
+    0% {
+        transform: scaleX(100%);
+    }
+    100% {
+        transform: scaleX(0%);
+    }
+}
+@keyframes flip-card-part2 {
+    0% {
+        transform: scaleX(0%);
+    }
+    100% {
+        transform: scaleX(100%);
+    }
+}
+
+.game {
+    display: flex;
+    flex-direction: column;
+
+    background-image: url(./poker-background.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    padding: 1rem;
+}
+.game .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.game .answer-response {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    min-width: 50%;
+    min-height: 20%;
+    padding: 1rem;
+    border: 2px solid black
+}
+.score {
+    margin-left: auto;
+}
+.question-cards {
+    display: flex;
+    justify-content: space-around;
+}
+.card-back {
+    cursor: pointer;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+
+    width: 6rem;
+    height: 8.5rem;
+    
+    background-image: url(./card-back.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+    border-radius: 5px;
+    border: 1px solid;
+}
+.card-front {
+    cursor: pointer;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+
+    width: 6rem;
+    height: 8.5rem;
+
+    background-color: white;
+    
+    border-radius: 5px;
+    border: 1px solid;
+
+    animation: flip-card-part2 150ms forwards;
+}
+
+
+.card-back:hover {
+    transition: 300ms;
+    transform: scale(105%);
+}
+.card-back > * {
+    font-size: 48px;
+    color: white;
+}
