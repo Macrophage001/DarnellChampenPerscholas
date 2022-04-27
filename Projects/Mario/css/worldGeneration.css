@@ -1,0 +1,37 @@
+:root {
+    /* --mario: url(../mario.png); */
+    --tile-set: url(../tileset/superMarioTileset.png);
+    --tile-s: 16px;
+    --tile-x: 0px;
+    --tile-y: 0px;
+}
+
+#mario {
+    width: 16px;
+    height: 16px;
+
+    position: absolute;
+
+    background-image: url(../mario.png);
+    background-position: center;
+    background-size: cover;
+}
+
+.level {
+    height: 50vh;
+}
+.tiles {
+    display: grid;
+    height: 100vh;
+    grid-template-columns: repeat(256, auto);
+    justify-content: center;
+    align-items: end;
+}
+.tile {
+    width: var(--tile-s);
+    height: var(--tile-s);
+
+    margin-right: -5px;
+    background-image: var(--tile-set);
+    background-position: var(--tile-x) var(--tile-y);
+}
