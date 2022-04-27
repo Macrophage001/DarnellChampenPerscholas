@@ -64,7 +64,8 @@
     background: none;
     border: none;
     position: absolute;
-    top: 0;
+
+    top: 1rem;
     right: 25px;
     font-size: 36px;
     margin-left: 50px;
