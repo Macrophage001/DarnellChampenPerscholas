@@ -1,0 +1,49 @@
+body {
+    background-color: #010101;
+}
+
+.canvas {
+    min-height: 12rem;
+}
+.pac-man {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+
+    background-image: url(./pacMan.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    position: absolute;
+}
+.face-up {
+    transform: rotateZ(-90deg);
+}
+.face-down {
+    transform: rotateZ(90deg);
+}
+.face-left {
+    transform: rotateZ(180deg);
+}
+.face-right {
+    transform: rotateZ(0deg);
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.mid-controls {
+    margin: 0.1rem;
+}
+.controls button {
+    padding: 0.1rem;
+    margin: 0.1rem;
+    min-width: 2rem;
+
+    font-size: 1.5rem;
+    font-weight: bold;
+}
