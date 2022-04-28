@@ -10,6 +10,11 @@ body {
     background-color: #000;
 }
 
+:root {
+    --ship-health: 100%;
+    --alien-health: 100%;
+}
+
 .game {
     display: flex;
     height: 52vh;
@@ -41,19 +46,49 @@ body {
     /* border: 2px solid red; */
 }
 .player-ship {
+    background-image: url(../assets/images/spaceship.gif);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
     position: relative;
     width: 64px;
     height: 64px;
 
     transform: rotateZ(90deg);
 }
+.player-ship::after {
+    content: '';
+    display: block;
+    width: 2px;
+    height: var(--ship-health);
+
+    right: -100%;
+    background-color: green;
+    position: relative;
+}
 .player-ship-attack-animation {
     animation: player-attack 1000ms;
 }
 .alien-ship {
+    background-image: url(../assets/images/mojojojo.gif);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
     position: relative;
     width: 64px;
     height: 64px;
+}
+.alien-ship::after {
+    content: '';
+    display: block;
+    width: var(--alien-health);
+    height: 2px;
+
+    bottom: -100%;
+    background-color: green;
+    position: relative;
 }
 .alien-ship-attack-animation {
     animation: alien-attack 1000ms;

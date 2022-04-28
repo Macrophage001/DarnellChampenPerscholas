@@ -10,23 +10,24 @@
 <body>
     <div class="game">
         <div class="ship-area-player">
-            <img src="./assets/images/spaceship.gif" alt="" class="player-ship">
+            <!-- <img src="./assets/images/spaceship.gif" alt="" class="player-ship" onanimationend="onAnimationCompleted(this)"> -->
+            <div class="player-ship" onanimationend="onAnimationCompleted(this)"></div>
         </div>
-        <h2>Current Turn</h2>
+        <h2 id="current-turn">Current Turn</h2>
         <div class="ship-area-aliens">
-            <img src="./assets/images/mojojojo.gif" alt="" class="alien-ship">
-            <img src="./assets/images/mojojojo.gif" alt="" class="alien-ship">
-            <img src="./assets/images/mojojojo.gif" alt="" class="alien-ship">
-            <img src="./assets/images/mojojojo.gif" alt="" class="alien-ship">
-            <img src="./assets/images/mojojojo.gif" alt="" class="alien-ship">
-            <img src="./assets/images/mojojojo.gif" alt="" class="alien-ship">
+            <div class="alien-ship" onanimationend="onAnimationCompleted(this)"></div>
+            <div class="alien-ship" onanimationend="onAnimationCompleted(this)"></div>
+            <div class="alien-ship" onanimationend="onAnimationCompleted(this)"></div>
+            <div class="alien-ship" onanimationend="onAnimationCompleted(this)"></div>
+            <div class="alien-ship" onanimationend="onAnimationCompleted(this)"></div>
+            <div class="alien-ship" onanimationend="onAnimationCompleted(this)"></div>
         </div>
     </div>
 
     <h2>Legend:</h2>
     <div class="controls">
-        <button>Shoot</button>
-        <button>Retreat</button>
+        <button id="attack-btn" class="action-btn" onclick="PlayerAttack()">Attack</button>
+        <button id="retreat-btn" class="action-btn" onclick="Retreat()">Retreat</button>
     </div>
     <div class="legend">
         <p class="score">USS Assembly: <span>0</span></p>
