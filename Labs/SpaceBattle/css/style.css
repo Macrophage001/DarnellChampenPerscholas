@@ -3,7 +3,7 @@
     padding: 0;
     box-sizing: border-box;
 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 body {
@@ -28,6 +28,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 
     height: 90%;
     width: 12vw;
@@ -45,8 +46,16 @@ body {
     margin: 0 1rem;
     /* border: 2px solid red; */
 }
+.health-bar {
+    position: relative;
+    width: var(--ship-health);
+    height: 2px;
+
+
+    background-color: green;
+}
 .player-ship {
-    background-image: url(../assets/images/spaceship.gif);
+    background-image: url(../assets/images/spaceship\ -\ Copy.gif);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -54,22 +63,14 @@ body {
     position: relative;
     width: 64px;
     height: 64px;
-
-    transform: rotateZ(90deg);
-}
-.player-ship::after {
-    content: '';
-    display: block;
-    width: 2px;
-    height: var(--ship-health);
-
-    right: -100%;
-    background-color: green;
-    position: relative;
 }
 .player-ship-attack-animation {
     animation: player-attack 1000ms;
 }
+.player-ship-retreat-animation {
+    animation: player-retreat 2500ms forwards;
+}
+
 .alien-ship {
     background-image: url(../assets/images/mojojojo.gif);
     background-size: cover;
@@ -80,15 +81,20 @@ body {
     width: 64px;
     height: 64px;
 }
-.alien-ship::after {
-    content: '';
-    display: block;
-    width: var(--alien-health);
-    height: 2px;
-
-    bottom: -100%;
-    background-color: green;
+.alien-stats {
     position: relative;
+    min-width: 2rem;
+    min-height: 4rem;
+    border: 2px solid white;
+    border-radius: 5%;
+    right: -100%;
+    /* background-color: white; */
+}
+
+.alien-stats p {
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
 }
 .alien-ship-attack-animation {
     animation: alien-attack 1000ms;
@@ -113,6 +119,22 @@ body {
     }
     100% {
         left: 0;
+    }
+}
+
+
+@keyframes player-retreat {
+    0% {
+        transform: rotateZ(0deg);
+        left: 0vw;
+    }
+    25% {
+        left: 8vw;
+        transform: rotateZ(180deg);
+    }
+    100% {
+        transform: rotateZ(180deg);
+        left: -25vw;
     }
 }
 
