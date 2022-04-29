@@ -24,6 +24,9 @@ body {
     justify-content: space-between;
 
     background-image: url(../assets/images/starsBackground.gif);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 .ship-area-player {
     align-self: center;
