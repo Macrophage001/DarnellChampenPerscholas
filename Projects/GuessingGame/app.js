@@ -20,7 +20,7 @@ const toggleFace = (element) => {
     let cardScoreText = 
         element.children[0];
 
-    if (!element.classList.contains('card-front'))
+    if (element.classList.contains('card-front') === false)
     {
         element.classList.remove('card-back');
         element.classList.remove('scale-x-down');
