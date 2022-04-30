@@ -377,4 +377,16 @@ h2 {
         font-weight: bold;
         font-size: 12px;
     }
+
+    @keyframes player-leave {
+        0% {
+            left: 0vw;
+        }
+        25% {
+            left: -2vw;
+        }
+        100% {
+            left: 85vw;
+        }
+    }
 }
