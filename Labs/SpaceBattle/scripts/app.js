@@ -1,5 +1,5 @@
-const ship = document.querySelector('.player-ship');
-const alienShips = document.getElementsByClassName('alien-ship');
+const shipDiv = document.querySelector('.player-ship');
+const alienShipDivs = document.getElementsByClassName('alien-ship');
 const alienStats = document.getElementsByClassName('alien-stats');
 
 const playerScore = document.getElementById('player-score');
@@ -26,19 +26,17 @@ const range = (min, max) => Math.random() * (max - min) + min;
 const alienStatsTemplate = (currentHull, maxHull, firepower, accuracy) => `<div class="alien-stats"><p>HP:${currentHull}/${maxHull}</p><p>FP:${firepower}</p><p>A: ${accuracy}%</p></div>`
 
 class Ship {
-    constructor() {
-        this.name = 'USS Assembly';
-        this.maxHull = 20;
+    constructor(name, maxHull, firepower, accuracy) {
+        this.name = name;
+        this.maxHull = maxHull;
         this.currentHull = this.maxHull;
-        this.firepower = 5;
-        this.accuracy = 0.7;
+        this.firepower = firepower;
+        this.accuracy = accuracy;
         this.score = 0;
     }
 
-    DoDamage() {
-        let target = Aliens[CurrentAlienIndex];
+    DoDamage(target) {
         actionsList.push(`${this.name} Attacking ${target.name}`);
-        // console.log(`${this.name} Attacking ${target.name}`);
         let chance = Math.random();
         if (chance <= this.accuracy) {
             target.currentHull -= this.firepower;
@@ -46,13 +44,9 @@ class Ship {
 
             if (target.currentHull <= 0)
                 onAlienDestroyed();
-            // console.log(`${this.name} hit ${this.name} for ${this.firepower} damage!`)
         } else {
             actionsList.push(`${this.name} missed!`);
-            // console.log(`${this.name} missed!`);
         }
-
-        // updateActionsDisplay();
     }
 
     Animate(element, className) {
@@ -61,88 +55,106 @@ class Ship {
 
     OnAnimationCompleted(element, className, callback) {
         element.classList.remove(className);
-        this.DoDamage(Aliens[CurrentAlienIndex]);
+        this.DoDamage(aliens[CurrentAlienIndex]);
         callback();
     }
 }
-class Alien {
+
+class USSAssembly extends Ship {
+    constructor() {
+        super('USS Assembly', 20, 5, 0.7);
+    }
+}
+class Alien extends Ship {
     constructor(name) {
-        this.name = name;
-        this.maxHull = Math.trunc(range(8, 12));
-        this.currentHull = this.maxHull;
-        this.firepower = Math.trunc(range(2, 4));
-        this.accuracy = range(.6, .8);
-    }
-
-    DoDamage() {
-        let target = USSAssembly;
-        //actionsList.push(`${this.name} Attacking ${target.name}`);
-        // console.log(`${this.name} Attacking ${target.name}`);
-        let chance = Math.random();
-        if (chance <= this.accuracy) {
-            target.currentHull -= this.firepower;
-            actionsList.push(`${this.name} hit ${target.name} for ${this.firepower} damage!`);
-            // console.log(`${this.name} hit ${this.name} for ${this.firepower} damage!`)
-
-            if (target.currentHull <= 0)
-                onPlayerDestroyed();
-        } else {
-            actionsList.push(`${this.name} missed!`);
-            // console.log(`${this.name} missed!`);
-        }
-        // updateActionsDisplay();
-    }
-
-    Animate(element, className) {
-        element.classList.add(className);
-    }
-
-    OnAnimationCompleted(element, className, callback) {
-        element.classList.remove(className);
-        this.DoDamage(Aliens[CurrentAlienIndex]);
-        callback();
+        super(name, Math.trunc(range(8, 12)), Math.trunc(range(2, 4)), range(0.6, 0.8));
     }
 }
 
-// 0 = Player, 1 = Alien.
-let CurrentTurnDisplay = '';
-let PlayerTurn = true;
+// class Ship {
+//     constructor() {
+//         this.name = 'USS Assembly';
+//         this.maxHull = 20;
+//         this.currentHull = this.maxHull;
+//         this.firepower = 5;
+//         this.accuracy = 0.7;
+//         this.score = 0;
+//     }
+
+//     DoDamage() {
+//         let target = Aliens[CurrentAlienIndex];
+//         actionsList.push(`${this.name} Attacking ${target.name}`);
+//         let chance = Math.random();
+//         if (chance <= this.accuracy) {
+//             target.currentHull -= this.firepower;
+//             actionsList.push(`${this.name} hit ${target.name} for ${this.firepower} damage!`);
+
+//             if (target.currentHull <= 0)
+//                 onAlienDestroyed();
+//         } else {
+//             actionsList.push(`${this.name} missed!`);
+//         }
+//     }
+
+//     Animate(element, className) {
+//         element.classList.add(className);
+//     }
+
+//     OnAnimationCompleted(element, className, callback) {
+//         element.classList.remove(className);
+//         this.DoDamage(Aliens[CurrentAlienIndex]);
+//         callback();
+//     }
+// }
+// class Alien {
+//     constructor(name) {
+//         this.name = name;
+//         this.maxHull = Math.trunc(range(8, 12));
+//         this.currentHull = this.maxHull;
+//         this.firepower = Math.trunc(range(2, 4));
+//         this.accuracy = range(.6, .8);
+//     }
+
+//     DoDamage() {
+//         let target = USSAssembly;
+//         let chance = Math.random();
+//         if (chance <= this.accuracy) {
+//             target.currentHull -= this.firepower;
+//             actionsList.push(`${this.name} hit ${target.name} for ${this.firepower} damage!`);
+
+//             if (target.currentHull <= 0)
+//                 onPlayerDestroyed();
+//         } else {
+//             actionsList.push(`${this.name} missed!`);
+//         }
+//     }
+
+//     Animate(element, className) {
+//         element.classList.add(className);
+//     }
+
+//     OnAnimationCompleted(element, className, callback) {
+//         element.classList.remove(className);
+//         this.DoDamage(Aliens[CurrentAlienIndex]);
+//         callback();
+//     }
+// }
+
 let CurrentAlienIndex = 0;
+let ussAssembly = new USSAssembly();
+let aliens = [];
 
-let USSAssembly = new Ship();
+const animationCompletedMap = {
+    'player-ship': (element) => ussAssembly.OnAnimationCompleted(element, 'player-ship-attack-animation', () => {
+        ussAssembly.DoDamage(aliens[0]);
 
-let Aliens = [];
-
-const activeAlienData = () => Aliens[0];
-const activeAlienShip = () => alienShip[0];
-
-const SwitchTurn = () => {
-    console.log('Switching Turns...');
-    PlayerTurn = !PlayerTurn;
-    if (PlayerTurn) {
-        CurrentTurnDisplay = "Player's Turn!";
-    } else {
-        CurrentTurnDisplay = "Alien's Turn!";
-    }
-}
-
-const animationCompletedLogic = {
-    'player-ship': (element) => USSAssembly.OnAnimationCompleted(element, 'player-ship-attack-animation', () => {
-        // console.log('Current Alien Index: ' + CurrentAlienIndex);
-        // console.log('Alien Health before Attack: ' + Aliens[CurrentAlienIndex].currentHull);
-
-        USSAssembly.DoDamage();
-        // console.log('Alien Health after Attack: ' + Aliens[CurrentAlienIndex].currentHull);
-
-        UpdateAlienStats();
-        SwitchTurn();
-        if (Aliens[CurrentAlienIndex].currentHull > 0)
+        updateAlienStats();
+        if (aliens[CurrentAlienIndex].currentHull > 0)
             onAlienAttack();
     }),
-    'alien-ship': (element) => Aliens[CurrentAlienIndex].OnAnimationCompleted(element, 'alien-ship-attack-animation', () => {
-        Aliens[0].DoDamage();
-        UpdatePlayerStats();
-        SwitchTurn();
+    'alien-ship': (element) => aliens[CurrentAlienIndex].OnAnimationCompleted(element, 'alien-ship-attack-animation', () => {
+        aliens[0].DoDamage(ussAssembly);
+        updatePlayerStats();
         attackBtn.disabled = false;
     })
 }
@@ -150,89 +162,93 @@ const onAnimationCompleted = (element) => {
     if (element.classList.contains('player-ship-attack-animation') ||
         element.classList.contains('alien-ship-attack-animation')) {
         let className = element.classList[0];
-        animationCompletedLogic[className](element);
+        animationCompletedMap[className](element);
     } else if (element.classList.contains('alien-ship') && element.classList.contains('player-ship-destroyed-animation')) {
-        alienShips[CurrentAlienIndex].remove();
-        Aliens.splice(CurrentAlienIndex, 1);
-        console.log(Aliens);
-        USSAssembly.score++;
+        alienShipDivs[CurrentAlienIndex].remove();
+        aliens.splice(CurrentAlienIndex, 1);
+        console.log(aliens);
+        ussAssembly.score++;
         updatePlayerScore();
 
-        if (alienShips.length === 0) {
-            USSAssembly.Animate(ship, 'player-ship-leave-animation');
+        if (alienShipDivs.length === 0) {
+            ussAssembly.Animate(shipDiv, 'player-ship-leave-animation');
         }
 
         attackBtn.disabled = false;
     }
 }
 
-const updateActionsDisplay = () => {
-    let repeat = () => {
-        let actionsString = '';
-        actionsList.forEach(action => actionsString += `<p>${action}</p>`);
-        actionsDisplay.innerHTML = actionsString;
-
-        actionsDisplay.scroll(0, 1000);
-
-        let t = setTimeout(() => {
-            repeat();
-            clearTimeout(t);
-        }, 10);
-    }
-    repeat();
-}
-
-const updatePlayerScore = () => {
-    playerScore.innerHTML = playerScoreTemplate(USSAssembly.score);
-}
-
 const onAlienDestroyed = () => {
-    // console.log(alienStats);
-    let alienShip = alienShips[0];
-    alienShip.classList.add('player-ship-destroyed-animation');
-    alienShip.classList.add('destroyed');
+    let alienShipDiv = alienShipDivs[0];
+    alienShipDiv.classList.add('player-ship-destroyed-animation');
+    alienShipDiv.classList.add('destroyed');
 }
 const onPlayerDestroyed = () => {
-    ship.classList.add('player-ship-destroyed-animation');
+    shipDiv.classList.add('player-ship-destroyed-animation');
 }
 const onPlayerAttack = () => {
-    USSAssembly.Animate(ship, 'player-ship-attack-animation');
+    ussAssembly.Animate(shipDiv, 'player-ship-attack-animation');
     attackBtn.disabled = true;
 }
 const onAlienAttack = () => {
-    Aliens[CurrentAlienIndex].Animate(alienShips[CurrentAlienIndex], 'alien-ship-attack-animation');
+    aliens[CurrentAlienIndex].Animate(alienShipDivs[CurrentAlienIndex], 'alien-ship-attack-animation');
 }
 const onRetreat = () => {
-    ship.classList.add('player-ship-retreat-animation');
+    shipDiv.classList.add('player-ship-retreat-animation');
 }
 
 const Init = () => {
     CurrentAlienIndex = 0;
 }
 
-const UpdateAlienStats = () => {
-    for (let i = 0; i < alienShips.length; i++) {
-        let alienShipDiv = alienShips[i];
-        let alienStats = Aliens[i];
-        let currentHull = Math.trunc(alienStats.currentHull);
-        let maxHull = Math.trunc(alienStats.maxHull);
-        let firepower = Math.trunc(alienStats.firepower);
-        let accuracy = Math.trunc(alienStats.accuracy * 100);
+const loop = (callback, interval) => {
+    let repeat = () => {
+        callback();
+        let t = setTimeout(() => {
+            repeat();
+            clearTimeout(t)
+        });
+    }
+    repeat();
+}
+const updateAlienStats = () => {
+    for (let i = 0; i < alienShipDivs.length; i++) {
+        let alienShipDiv = alienShipDivs[i];
+        let alien = aliens[i];
+
+        let currentHull = alien.currentHull;
+        let maxHull = alien.maxHull;
+        let firepower = alien.firepower;
+        let accuracy = Math.trunc(alien.accuracy * 100);
 
         alienShipDiv.innerHTML = alienStatsTemplate(currentHull, maxHull, firepower, accuracy);
     }
 }
-const UpdatePlayerStats = () => {
-    playerStats.innerHTML = playerStatsTemplate(USSAssembly.currentHull, USSAssembly.maxHull, USSAssembly.firepower, USSAssembly.accuracy * 100);
+const updatePlayerStats = () => {
+    playerStats.innerHTML = playerStatsTemplate(ussAssembly.currentHull, ussAssembly.maxHull, ussAssembly.firepower, ussAssembly.accuracy * 100);
 }
+const updateActionsDisplay = () => {
+    loop(() => {
+        let actionsString = '';
+        actionsList.forEach(action => actionsString += `<p>${action}</p>`);
+        actionsDisplay.innerHTML = actionsString;
+
+        actionsDisplay.scroll(0, 1000);
+    }, 10);
+}
+const updatePlayerScore = () => {
+    playerScore.innerHTML = playerScoreTemplate(ussAssembly.score);
+}
+
 
 window.onload = function () {
     Init();
 
     for (let i = 0; i < 6; i++) {
-        Aliens.push(new Alien('Alien' + i, 5, 1, 1));
+        aliens.push(new Alien('Alien-0' + i));
     }
-    UpdateAlienStats();
-    UpdatePlayerStats();
+
+    updateAlienStats();
+    updatePlayerStats();
     updateActionsDisplay();
 };
