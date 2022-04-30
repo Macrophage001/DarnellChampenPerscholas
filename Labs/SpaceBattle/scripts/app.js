@@ -172,7 +172,7 @@ const updateActionsDisplay = () => {
         actionsList.forEach(action => actionsString += `<p>${action}</p>`);
         actionsDisplay.innerHTML = actionsString;
 
-        actionsDisplay.scroll(0, 350);
+        actionsDisplay.scroll(0, 1000);
 
         let t = setTimeout(() => {
             repeat();

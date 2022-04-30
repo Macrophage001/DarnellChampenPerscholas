@@ -7,7 +7,7 @@
 }
 
 body {
-    background-color: #060614;
+    background-color: #03030a;
 }
 
 
@@ -32,7 +32,7 @@ body {
     height: 52vh;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 4rem;
+    margin-top: 1rem;
     justify-content: space-between;
 
     background-image: url(https://media.giphy.com/media/U3qYN8S0j3bpK/giphy.gif);
@@ -40,9 +40,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
 
-    border: 1px solid #31326e;
-    border-radius: 10px;
-    box-shadow: 0 0 6px #3e3f97;
+    box-shadow: inset 0px 0px 21px #0000009d;
 
     overflow: hidden;
 }
@@ -69,13 +67,6 @@ body {
     margin: 0 1rem;
     /* border: 2px solid red; */
 }
-.health-bar {
-    position: relative;
-    width: var(--ship-health);
-    height: 2px;
-
-    background-color: green;
-}
 .player-ship {
     background-image: url(../assets/images/spaceship.gif);
     background-size: cover;
@@ -83,8 +74,8 @@ body {
     background-repeat: no-repeat;
 
     position: relative;
-    width: 64px;
-    height: 64px;
+    width: 3rem;
+    height: 3rem;
 }
 .player-ship-attack-animation {
     animation: player-attack 1000ms;
@@ -105,8 +96,9 @@ body {
     background-repeat: no-repeat;
 
     position: relative;
-    width: 64px;
-    height: 64px;
+    width: 4rem;
+    height: 4rem;
+
 }
 .alien-stats {
     position: relative;
@@ -228,8 +220,6 @@ h2 {
     padding: 1rem;
     justify-content: space-between;
     margin-top: 1rem;
-    border: 1px solid #31326e;
-    border-radius: 10px;
     box-shadow: 0px 4px 6px #3e40979d;
 }
 .console > * {
@@ -245,24 +235,24 @@ h2 {
 .player-stats > * {
     color: white;
     margin: 0.125rem;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     font-weight: bold;
 }
 .current-actions {
     display: flex;
-    /* max-height: 6rem; */
+    max-height: 4rem;
     flex-direction: column;
     overflow: auto;
 }
 .current-actions p {
     color: white;
-    font-size: 12px;
+    font-size: 0.9rem;
 }
 .controls {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0.5rem;
+    
 }
 .action-btn {
     cursor: pointer;
@@ -273,25 +263,21 @@ h2 {
     padding: 1rem;
 
     color: white;
-    box-shadow: 0px 0px 8px #3e40979d;
+    box-shadow: 0px 4px 8px #3e40979d;
 }
 .action-btn:hover {
     transition: 300ms;
-    border-radius: 8%;
-    border: 1px solid #3e4097;
-    box-shadow: 0px 0px 12px #3b3eff;
+    box-shadow: 0px 4px 12px #3b3eff;
 }
 .action-btn:disabled {
     cursor: default;
     border-radius: 8%;
-    border: 1px solid #ff0000;
-    box-shadow: 0px 0px 8px #ff0000;
+    border: 1px solid none solid solid #ff0000;
+    box-shadow: 0px 4px 8px #ff0000;
 }
 .legend {
     display: flex;
     justify-content: space-between;
-    margin-left: auto;
-    margin-right: auto;
     max-width: 50vw;
     margin-top: 1rem;
     border-radius: 5px;
@@ -301,13 +287,94 @@ h2 {
     min-width: 16rem;
     min-height: 2rem;
     padding: 1rem;
-    margin: auto;
 
-    border: 1px solid #31326e;
-    border-radius: 10px;
     box-shadow: 0px 4px 6px #3e40979d;
     
     color: white;
     font-weight: bold;
-    font-size: 21px;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 650px) {
+    .game {
+        max-width: 75vw;
+        height: 52vh;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 1rem;
+    }
+    .legend {
+        justify-content: center;
+    }
+    .player-ship {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+    .alien-ship {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+    .alien-stats {
+        position: relative;
+        min-width: 1rem;
+        min-height: 1rem;
+        border-radius: 5%;
+
+        box-shadow: 0 0 8px green;
+        border: 1px solid green;
+
+        right: -100%;
+    }
+    .alien-stats p {
+        color: rgb(204, 255, 159);
+        font-size: 6px;
+        font-weight: bold;
+        margin: 0;
+        padding: 0.1rem;
+    }
+    .console {
+        display: flex;
+        position: relative;
+        max-width: 75vw;
+        padding: 1rem;
+        justify-content: space-between;
+        margin-top: 1rem;
+        box-shadow: 0px 4px 6px #3e40979d;
+    }
+    .player-stats {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    
+        border-radius: 5%;
+    }
+    .player-stats > * {
+        color: white;
+        font-size: 0.6rem;
+        font-weight: bold;
+    }
+    .current-actions {
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+        max-height: 2.5rem;
+    }
+    .current-actions p {
+        color: white;
+        font-size: 0.6rem;
+    }
+    .legend {
+        display: flex;
+        margin-top: 1rem;
+        border-radius: 5px;
+    }
+    .legend .score {
+        text-align: center;
+        box-shadow: 0px 4px 6px #3e40979d;
+        
+        color: white;
+        font-weight: bold;
+        font-size: 12px;
+    }
 }
