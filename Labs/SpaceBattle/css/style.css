@@ -110,10 +110,8 @@ h3 {
     background-position: center;
     background-repeat: no-repeat;
 
-    position: relative;
     max-width: 4rem;
     max-height: 4rem;
-
 }
 .alien-stats {
     position: relative;
@@ -350,10 +348,10 @@ h2 {
         max-width: 2.5rem;
         max-height: 2.5rem;
     }
-    .alien-ship {
+    /* .alien-ship {
         max-width: 2.5rem;
         max-height: 2.5rem;
-    }
+    } */
     .alien-stats {
         position: relative;
         min-width: 1rem;
@@ -416,7 +414,6 @@ h2 {
         justify-content: center;
         flex-direction: column;
     
-        height: 90%;
         width: 12vw;
         margin: 0 3rem;
     }
