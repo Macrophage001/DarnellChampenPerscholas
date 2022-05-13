@@ -22,4 +22,8 @@ app.get('/tip/:total/:tipPercentage', (req, resp) => {
     resp.send(`Total Tip: ${req.params.total * req.params.tipPercentage}$`);
 });
 
+app.get('/magic/:question', (req, resp) => {
+    resp.send([`<h2>Question: ${req.params.question}</h2>`, `<h2>Response: ${magic8BallResponses[Math.floor(Math.random() * magic8BallResponses.length)]}</h2>`].join(''));
+});
+
 app.listen(port, () => console.log('Listening on port: ' + port));
