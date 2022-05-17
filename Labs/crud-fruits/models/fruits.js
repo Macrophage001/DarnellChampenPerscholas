@@ -13,6 +13,16 @@ const fruits = [
         name: 'banana',
         color: 'red',
         readyToEat: true
+    },
+    {
+        name: 'mango',
+        color: 'yellow',
+        readyToEat: true
+    },
+    {
+        name: 'papaya',
+        color: 'orange',
+        readyToEat: true
     }
 ];
 
