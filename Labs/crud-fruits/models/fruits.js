@@ -1,3 +1,13 @@
+const mongoose = require('mongoose');
+
+const fruitsSchema = new mongoose.Schema({
+    name: {type: String, required: true},
+    color: {type: String, required: true},
+    readyToEat: Boolean
+});
+
+const Fruit = mongoose.model('Fruit', fruitsSchema);
+
 const fruits = [
     {
         name: 'apple',
@@ -26,4 +36,4 @@ const fruits = [
     }
 ];
 
-module.exports = fruits;
+module.exports = { fruits, Fruit };
