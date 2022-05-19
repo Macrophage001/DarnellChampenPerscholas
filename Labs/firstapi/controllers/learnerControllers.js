@@ -1,18 +1,12 @@
 const Learner = require('../models/learner');
 
-const getAllLearners = (req, resp) => {
-    Learner.find({}, (error, learners) => {
-        console.log(error);
-        resp.render('createLearner', {
-            learners
-        });
-    });
+const getAllLearners = async (req, resp) => {
+    let learners = await Learner.find({});
+    resp.render('createLearner', { learners });
 }
-const createLearner = (req, resp) => {
-    console.log('Creating Learner');
-    Learner.create(req.body, (error, createdLearner) => {
-        resp.redirect(process.env.LEARNER_API);
-    });
+const createLearner = async (req, resp) => {
+    let newLearner = await Learner.create(req.body);
+    resp.redirect(process.env.LEARNER_API);
 }
 
 const getSingleLearner = async (req, resp) => {
@@ -21,20 +15,18 @@ const getSingleLearner = async (req, resp) => {
     resp.render('singleLearner', { learners: result });
 }
 
+const dbFilter = (id) => ({name: id});
 const getUpdateLearner = async (req, resp) => {
-    let filter = { name: req.params.id }
-    let result = await Learner.findOne(filter);
+    let result = await Learner.findOne(dbFilter(req.params.id));
     resp.render('updateLearner', { learner: result });
 }
 const updateLearner = async (req, resp) => {
-    let filter = { name: req.params.id }
     let updatedData = req.body;
-    await Learner.findOneAndUpdate(filter, updatedData);
+    await Learner.findOneAndUpdate(dbFilter(req.params.id), updatedData);
     resp.redirect(process.env.LEARNER_API);
 }
 const deleteLearner = async (req, resp) => {
-    let filter = { name: req.params.id }
-    await Learner.remove(filter);
+    await Learner.remove(dbFilter(req.params.id));
     resp.redirect(process.env.LEARNER_API);
 }
 

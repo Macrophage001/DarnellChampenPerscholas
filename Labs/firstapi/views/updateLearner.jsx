@@ -1,17 +1,8 @@
 import React from 'react'
 
+const { formStyle, inputStyle } = require('../styles/createLearnerStyles');
+
 const UpdateLearner = ({ learner }) => {
-    const formStyle = {
-        display: 'flex',
-        justifyContent: 'start',
-        alignItems: 'start',
-        flexDirection: 'column'
-    }
-    const inputStyle = {
-        padding: '0.25rem',
-        margin: '0.125rem',
-        borderRadius: '5px'
-    }
     return (
         <div>
             <form style={formStyle} action={`${process.env.LEARNER_API}/update/${learner.name}`} method='POST'>
