@@ -5,29 +5,49 @@ const getAllLearners = async (req, resp) => {
     resp.render('createLearner', { learners });
 }
 const createLearner = async (req, resp) => {
-    let newLearner = await Learner.create(req.body);
-    resp.redirect(process.env.LEARNER_API);
+    try {
+        let newLearner = await Learner.create(req.body);
+        resp.redirect(process.env.LEARNER_API);
+    } catch (e) {
+        console.error('Error: ', e);
+    }
 }
 
 const getSingleLearner = async (req, resp) => {
     let name = req.params.id;
-    let result = await Learner.find({name});
-    resp.render('singleLearner', { learners: result });
+    try {
+        let result = await Learner.find({ name });
+        resp.render('singleLearner', { learners: result });
+    } catch (e) {
+        console.error('Error: ', e);
+    }
 }
 
-const dbFilter = (id) => ({name: id});
+const dbFilter = (id) => ({ firstName: id });
 const getUpdateLearner = async (req, resp) => {
-    let result = await Learner.findOne(dbFilter(req.params.id));
-    resp.render('updateLearner', { learner: result });
+    try {
+        let result = await Learner.findOne(dbFilter(req.params.id));
+        resp.render('updateLearner', { learner: result });
+    } catch (e) {
+        console.error('Error: ', e);
+    }
 }
 const updateLearner = async (req, resp) => {
-    let updatedData = req.body;
-    await Learner.findOneAndUpdate(dbFilter(req.params.id), updatedData);
-    resp.redirect(process.env.LEARNER_API);
+    try {
+        let updatedData = req.body;
+        await Learner.findOneAndUpdate(dbFilter(req.params.id), updatedData);
+        resp.redirect(process.env.LEARNER_API);
+    } catch (e) {
+        console.error('Error: ', e);
+    }
 }
 const deleteLearner = async (req, resp) => {
-    await Learner.remove(dbFilter(req.params.id));
-    resp.redirect(process.env.LEARNER_API);
+    try {
+        await Learner.remove(dbFilter(req.params.id));
+        resp.redirect(process.env.LEARNER_API);
+    } catch (e) {
+        console.error('Error: ', e);
+    }
 }
 
 module.exports = {

@@ -3,4 +3,4 @@ Examples/ShoppingCart/desktop.ini
 Examples/NoteTaking/desktop.ini
 
 node_modules/
-.env
+.env*
