@@ -56,10 +56,10 @@ Array.prototype.zipMax = function (rightArr, fn) {
  * Church Encodings: https://en.wikipedia.org/wiki/Church_encoding
  */
 
-const I = a => a // Identity
-const B = f => g => f(g()) // B-Combinator: Composes two functions
+const I   = a => a // Identity
+const B   = f => g => f(g()) // B-Combinator: Composes two functions
 // const BB = f => g => a => b => f(b(g(a)))
-const BB = B(B(B))
+const BB  = B(B(B))
 const Y   = f => (g = h => x => f(h(h))(x))(g) // Y-Combinator: Recursion
 const C   = f => a => b => f(b)(a) // Cardinal - Flips parameters
 const M   = f => f(f) // Mockingbird: Self-applicator
@@ -75,7 +75,6 @@ const F = KI
 const n0    = f => a => a
 const n1    = f => a => f(a)
 const succ  = n => f => a => f(n(f)(a))
-const vireo = a => b => f => f(a)(b)
 const fst   = p => p(K)
 const snd   = p => p(KI)
 const add   = n => k => n(succ)(k)
@@ -95,13 +94,32 @@ const GT  = n => k => BB(NOT)(LEQ)
 
 const factorial = Y(fn => x => x == 0 ? 1 : x * fn(x - 1))
 
+const fib = (num) => {
+    let n1 = 0, n2 = 1, nextTerm;
+    for (let i = 0; i < num; i++) {
+        console.log(n1)
+        nextTerm = n1 + n2
+        n1 = n2
+        n2 = nextTerm
+    }
+}
+
+const fibY = Y(fn => num => n1 => n2 => nextTerm => arr => nextTerm <= num ? (arr.push(n1), nextTerm = n1 + n2, n1 = n2, n2 = nextTerm, fn(num)(n1)(n2)(nextTerm)(arr)) : arr)
+
+// let fibarr = fibY(20)(0)(1)(0)([])
+// console.log(fibarr)
+
 const reduce = function (obj, fn, initial) {
     let accumulator = initial
     for (let i = 0; i < obj.length; i++) 
         accumulator = fn(accumulator, obj[i])
     return accumulator
 }
-
+const reduceRecursive = function (obj, fn, initial, accumulator, i=0) {
+    return i == obj.length
+        ? accumulator
+        : (accumulator = fn(accumulator, obj[i]), reduceRecursive(obj, fn, initial, accumulator, i + 1));
+}
 const highestUnder = (arr, limit) => {
     let highest = -Infinity
     let index = -1

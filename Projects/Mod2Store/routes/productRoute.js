@@ -1,7 +1,16 @@
 const router = require('express').Router()
 
-const { retrieveIndexPage, retrieveNewProductPage, retrieveEditPage, retrieveShowProductPage,
-    addProduct, removeProduct, updateProduct } = require('../controllers/productControllers')
+const {
+    retrieveIndexPage,
+    retrieveNewProductPage,
+    retrieveEditPage,
+    retrieveShowProductPage,
+
+    addProduct,
+    removeProduct,
+    updateProduct,
+    buyProduct
+} = require('../controllers/productControllers')
 
 router.route('/')
     .get(retrieveIndexPage)
@@ -12,11 +21,14 @@ router.route('/new')
 
 router.route('/:id')
     .get(retrieveShowProductPage)
-    .post(updateProduct)
 
-router.route('/:id/edit')
+router.route('/delete/:id')
+    .get(removeProduct)
+router.route('/edit/:id')
     .get(retrieveEditPage)
-router.route('/:id/delete')
-    .post(removeProduct)
+router.route('/update/:id')
+    .post(updateProduct)
+router.route('/buy/:id')
+    .get(buyProduct)
 
 module.exports = router

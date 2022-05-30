@@ -1,6 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const { getAllLearners, createLearner, getSingleLearner, getUpdateLearner, updateLearner, deleteLearner } = require('../controllers/learnerControllers');
+const { 
+    getAllLearners, 
+    getSingleLearner, 
+    getUpdateLearner, 
+    
+    updateLearner, 
+    createLearner, 
+    deleteLearner 
+} = require('../controllers/learnerControllers');
 
 router.route('/')
     .get(getAllLearners)
