@@ -1,39 +1,19 @@
 import React from 'react'
 
-// 'header' class = search bar and nav links
-// 'content' class = controls background color
-// 'item-listing-grid' = controls the layout of the items on display
+const Header = require('./components/header')
+const Footer = require('./components/footer')
 
-const Header = () => {
-    const { headerMain, headerStyleTop, headerStyleBottom, navStyle, listStyle, anchorStyle } = require('../styles/headerStyle')
-    const navLinks = [
-        { title: 'Home', link: '/products' },
-        { title: 'New Product', link: '/products/new' }
-    ]
-
-    return (
-        <div style={headerMain}>
-            <div style={headerStyleTop}></div>
-            <div style={headerStyleBottom}>
-                <nav>
-                    <ul style={navStyle}>
-                        {navLinks && navLinks.map((link, i) => <li key={i} style={listStyle}> <a style={anchorStyle} href={link.link}>{link.title}</a> </li>)}
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    )
-}
-
-const Item = ({ product }) => {
+const Item = ({ index, product }) => {
     const { itemStyle, headerStyle, anchorStyle } = require('../styles/itemStyle')
+
+    console.log(`${process.env.PRODUCT_API}/${index}`)
 
     return (
         <div style={itemStyle(product.imgPath)} className="item-listing">
             <h3 style={headerStyle}>{product.name}</h3>
             <h4 style={headerStyle}>${product.price}</h4>
             <h4 style={headerStyle}>Stock: {product.stock}</h4>
-            <a style={anchorStyle} href="#"></a>
+            <a style={anchorStyle} href={`${process.env.PRODUCT_API}/${product.name}`}></a>
         </div>
     )
 }
@@ -44,25 +24,16 @@ const Content = ({ products }) => {
     return (
         <div style={contentStyle} className="content">
             <div style={itemListingGrid} className="item-listing-grid">
-                {products && products.map((product, i) => <Item key={i} product={product} />)}
+                {products && products.map((product, i) => <Item key={i} index={i} product={product} />)}
             </div>
         </div>
     )
 }
 
-const Footer = () => {
-    const footerStyle = {
-        position: 'relative',
-        bottom: '-65vh',
-        width: '100%',
-        height: '10vh',
-        backgroundColor: '#131921'
-    }
-
-    return (
-        <div style={footerStyle} className="footer"></div>
-    )
-}
+const navLinks = [
+    {title: 'Home', link: '#'},
+    {title: 'New Product', link: `${process.env.PRODUCT_API}/new`}
+]
 
 const Index = ({ products }) => {
     const style = {
@@ -86,7 +57,7 @@ const Index = ({ products }) => {
             </head>
             <body style={style}>
                 <div className="App">
-                    <Header />
+                    <Header title="Store App" links={navLinks} />
                     <Content products={products} />
                     <Footer />
                 </div>

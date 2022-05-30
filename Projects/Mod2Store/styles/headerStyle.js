@@ -2,11 +2,11 @@ const headerMain = {
     height: '8vh'
 }
 const headerStyleTop = {
-    height: '50%',
+    minHeight: '50%',
     backgroundColor: '#131921'
 }
 const headerStyleBottom = {
-    height: '50%',
+    minHeight: '50%',
     backgroundColor: '#131921'
 }
 const navStyle = {

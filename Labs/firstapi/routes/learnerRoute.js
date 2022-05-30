@@ -13,6 +13,7 @@ router.route('/:id')
 router.route('/update/:id')
     .get(getUpdateLearner)
     .post(updateLearner)
+    
 router.route('/delete/:id')
     .get(deleteLearner)
 

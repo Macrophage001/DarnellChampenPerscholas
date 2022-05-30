@@ -1,7 +1,7 @@
 const express = require("express");
 
 /**
- * Composes a series of functions and returns a function which yields the final result.
+ * Composes a series of functions and returns a function which returns the final result.
  */
 const compose = (...fns) => x => fns.reduceRight((previousFn, currentFn) => currentFn(previousFn), x);
 
@@ -22,6 +22,8 @@ Array.prototype.zipMin = function (rightArr, fn) {
         ? this.map((e, i) => fn(e, rightArr[i]))
         : rightArr.map((e, i) => fn(this[i], e));
 }
+
+
 
 /**
  * Combines the given array with the input array using the input fn
@@ -50,8 +52,55 @@ Array.prototype.zipMax = function (rightArr, fn) {
     }
 })();
 
-const Y = f => (g = h => x => f(h(h))(x))(g)
+/**
+ * Church Encodings: https://en.wikipedia.org/wiki/Church_encoding
+ */
+
+const I = a => a // Identity
+const B = f => g => f(g()) // B-Combinator: Composes two functions
+// const BB = f => g => a => b => f(b(g(a)))
+const BB = B(B(B))
+const Y   = f => (g = h => x => f(h(h))(x))(g) // Y-Combinator: Recursion
+const C   = f => a => b => f(b)(a) // Cardinal - Flips parameters
+const M   = f => f(f) // Mockingbird: Self-applicator
+const V   = a => b => f => f(a)(b) // Vireo: Data Structure Pair
+const Is0 = n => n(K(F))(T)
+
+const K  = a => b => a
+const KI = a => b => C(K)(a)(b)
+
+const T = K
+const F = KI
+
+const n0    = f => a => a
+const n1    = f => a => f(a)
+const succ  = n => f => a => f(n(f)(a))
+const vireo = a => b => f => f(a)(b)
+const fst   = p => p(K)
+const snd   = p => p(KI)
+const add   = n => k => n(succ)(k)
+const mult  = B
+const pow   = n => k => k(n)
+const phi   = p => p(snd(p))(succ(snd(p)))
+const pred  = n => fst(n(phi)(V(n0)(n0)))
+const sub   = n => k => k(pred)(n)
+
+const NOT = p => p(F)(T)
+const AND = p => q => p(q)(p)
+const OR  = p => q => p(p)(q)
+const LEQ = n => k => Is0(sub(n)(k))
+const BEQ = p => q => p(q)(NOT(q))
+const EQ  = n => k => AND(LEQ(n)(k))(LEQ(n)(k))
+const GT  = n => k => BB(NOT)(LEQ)
+
 const factorial = Y(fn => x => x == 0 ? 1 : x * fn(x - 1))
+
+const reduce = function (obj, fn, initial) {
+    let accumulator = initial
+    for (let i = 0; i < obj.length; i++) 
+        accumulator = fn(accumulator, obj[i])
+    return accumulator
+}
 
 const highestUnder = (arr, limit) => {
     let highest = -Infinity
@@ -65,36 +114,3 @@ const highestUnder = (arr, limit) => {
     }
     return { highest, index }
 }
-
-let keys = [5000, 1000, 500, 100, 50, 10, 5, 1]
-let symbols = ['V', 'M', 'D', 'C', 'L', 'X', 'V', 'I']
-
-const toRoman = (num) => {
-    let romanNumber = []
-    while (num > 0) {
-        let { highest, index } = highestUnder(keys, num)
-        num -= highest
-        romanNumber.push(symbols[index])
-    }
-    return romanNumber.reverse().reduce((previous, current) => previous + current, '')
-}
-
-const reduce = function (obj, fn, initial) {
-    let accumulator = initial
-    for (let i = 0; i < obj.length; i++) accumulator = fn(accumulator, obj[i])
-    return accumulator
-}
-
-const romanMap = {
-    'M': 1000,
-    'D': 500,
-    'C': 100,
-    'L': 50,
-    'X': 10,
-    'V': 5,
-    'I': 1
-}
-
-const result = reduce('IIIIVMMM', (prev, current) => prev += romanMap[current], 0)
-
-console.log(result)

@@ -12,7 +12,6 @@ const createLearner = async (req, resp) => {
         console.error('Error: ', e);
     }
 }
-
 const getSingleLearner = async (req, resp) => {
     let name = req.params.id;
     try {
