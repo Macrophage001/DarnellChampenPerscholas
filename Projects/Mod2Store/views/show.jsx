@@ -15,7 +15,7 @@ const Product = ({ product }) => (
             <nav>
                 <ul style={productNavULStyle}>
                     <li style={productNavListStyle}><a style={productButtonStyle} href={`${process.env.PRODUCT_API}/edit/${product.name}`}>Edit</a></li>
-                    <li style={productNavListStyle}><a style={productButtonStyle} href={`${process.env.PRODUCT_API}/buy/${product.name}`}>Buy</a></li>
+                    {product.stock > 0 && <li style={productNavListStyle}><a style={productButtonStyle} href={`${process.env.PRODUCT_API}/buy/${product.name}`}>Buy</a></li>}
                     <li style={productNavListStyle}><a style={productButtonStyle} href={`${process.env.PRODUCT_API}/delete/${product.name}`}>Remove</a></li>
                 </ul>
             </nav>

@@ -31,14 +31,14 @@ const Content = ({ products }) => {
 }
 
 const navLinks = [
-    {title: 'Home', link: '#'},
-    {title: 'New Product', link: `${process.env.PRODUCT_API}/new`}
+    { title: 'Home', link: '#' },
+    { title: 'New Product', link: `${process.env.PRODUCT_API}/new` }
 ]
 
 const Index = ({ products }) => {
     const style = {
-        margin: '0',
-        padding: '0',
+        margin: 0,
+        padding: 0,
         boxSizing: 'border-box',
         fontFamily: "'Roboto', sans-serif",
         backgroundColor: '#EAEDED'

@@ -14,7 +14,7 @@ mongoose.connection.once('open', () => console.log('Connected to Mongo!'))
 app.set('view engine', 'jsx')
 app.engine('jsx', require('express-react-views').createEngine())
 
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 app.use(process.env.PRODUCT_API, productRoute)

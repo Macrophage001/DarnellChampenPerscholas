@@ -14,7 +14,6 @@ const retrieveIndexPage = (req, resp) => {
     tryCatch(async () => {
         let products = await Product.find({})
         resp.render('index', { products })
-        console.log(str)
     })()
 }
 const retrieveNewProductPage = (req, resp) => {
@@ -47,6 +46,7 @@ const removeProduct = (req, resp) => {
         resp.redirect(process.env.PRODUCT_API)
     })()
 }
+
 const updateProduct = (req, resp) => {
     tryCatch(async () => {
         let updatedProduct = req.body;
@@ -54,6 +54,7 @@ const updateProduct = (req, resp) => {
         resp.redirect(process.env.PRODUCT_API)
     })()
 }
+
 const buyProduct = (req, resp) => {
     tryCatch(async () => {
         let product = await Product.findOne(dbFilter(req.params.id))
