@@ -1,7 +1,19 @@
 const headerMain = {
-    height: '8vh'
+    position: 'relative',
+    minHeight: '8%',
+    backgroundColor: '#131921',
+
+    padding: '0.75rem',
+    boxShadow: '0 0 8px black',
+    zIndex: 1
 }
+const headerTextStyle = {
+    padding: '1rem',
+    color: '#FFF',
+}
+
 const headerStyleTop = {
+    padding: '0.5rem',
     minHeight: '50%',
     backgroundColor: '#131921'
 }
@@ -22,4 +34,4 @@ const anchorStyle = {
     textDecoration: 'none',
     color: '#fff'
 }
-module.exports = { headerMain, headerStyleTop, headerStyleBottom, navStyle, listStyle, anchorStyle }
+module.exports = { headerMain, headerTextStyle, headerStyleTop, headerStyleBottom, navStyle, listStyle, anchorStyle }

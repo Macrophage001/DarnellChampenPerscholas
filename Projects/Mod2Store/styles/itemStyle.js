@@ -7,17 +7,15 @@ const itemStyle = (imgPath) => ({
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    
-    border: '4px solid #fff',
-    borderTopLeftRadius: '10px',
-    borderBottomRightRadius: '10px',
-    
-    width: '16vw',
-    height: '20vh',
+
+    width: '10vw',
+    height: '16vh',
 
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'end'
+    justifyContent: 'end',
+
+    boxShadow: '0 0 12px #B5B5B5'
 })
 
 const headerStyle = {
@@ -25,10 +23,19 @@ const headerStyle = {
     padding: 0,
     color: '#fff'
 }
+const titleHeaderStyle = {
+    ...headerStyle,
+    fontSize: '16px'
+}
+const subTitleHeaderStyle = {
+    ...headerStyle,
+    fontSize: '14px'
+}
 
 const anchorStyle = {
     position: 'absolute',
     width: '100%',
     height: '100%'
 }
-module.exports = { itemStyle, headerStyle, anchorStyle }
+
+module.exports = { itemStyle, titleHeaderStyle, subTitleHeaderStyle, headerStyle, anchorStyle }

@@ -1,18 +1,21 @@
 const contentStyle = {
     position: 'relative',
-    top: '1.4rem',
+
+    backgroundColor: '#fff',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
 
-    minHeight: '100vh'
+    width: '75%',
+    padding: '2rem',
+    margin: 'auto'
 }
 
-const itemListingGrid = {
+const itemListingGridStyle = {
     display: 'grid',
     placeItems: 'center',
     gridTemplateColumns: 'repeat(4, auto)',
     padding: '1rem'
 }
 
-module.exports = { contentStyle, itemListingGrid }
+module.exports = { contentStyle, itemListingGridStyle }

@@ -1,39 +1,38 @@
 import React from 'react'
-const Header = require('./components/header')
+// const Header = require('./components/header')
 
-const { showStyle, productStyle, productNavULStyle, productNavListStyle, productButtonStyle } = require('../styles/showStyle')
+import Header from './components/header'
+import Content from './components/content'
+import Footer from './components/footer'
+import Product from './components/product/product'
 
-const Product = ({ product }) => (
-    <div style={productStyle}>
-        <div>
-            <img src={product.imgPath} alt="preview_img" style={{ width: '200px', height: '200px' }} />
-            <h3>${product.price}</h3>
-            <h3>{product.stock > 0 ? `Quantity: ${product.stock}` : 'Out of Stock!'}</h3>
-        </div>
-        <div>
-            <p style={{ maxWidth: '50ch', marginLeft: '1rem' }}>{product.description}</p>
-            <nav>
-                <ul style={productNavULStyle}>
-                    <li style={productNavListStyle}><a style={productButtonStyle} href={`${process.env.PRODUCT_API}/edit/${product.name}`}>Edit</a></li>
-                    {product.stock > 0 && <li style={productNavListStyle}><a style={productButtonStyle} href={`${process.env.PRODUCT_API}/buy/${product.name}`}>Buy</a></li>}
-                    <li style={productNavListStyle}><a style={productButtonStyle} href={`${process.env.PRODUCT_API}/delete/${product.name}`}>Remove</a></li>
-                </ul>
-            </nav>
-        </div>
-    </div>
-)
+const rootStyle = require('../styles/rootStyle')
 
 const navLinks = [
     { title: 'Home', link: `${process.env.PRODUCT_API}` },
 ]
 
 const Show = ({ product }) => (
-    <body style={showStyle}>
-        <Header title={product.name} links={navLinks} />
-        <div style={{ position: 'relative' }}>
-            <Product product={product} />
-        </div>
-    </body>
+    <html>
+        <head>
+            <meta charSet="UTF-8" />
+            <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <link rel="preconnect" href="https://fonts.googleapis.com" />
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+            <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet" />
+            <title>EZ PC - {product.name}</title>
+        </head>
+        <body style={rootStyle}>
+            <Header title={`EZ PC | Product Information`} links={navLinks} />
+            <Content component={
+                <div style={{ position: 'relative' }}>
+                    <Product product={product} />
+                </div>
+            } />
+            <Footer />
+        </body>
+    </html>
 )
 
 module.exports = Show

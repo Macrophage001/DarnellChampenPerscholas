@@ -1,11 +1,10 @@
 {
-  "name": "mod2store",
+  "name": "uploadingimages",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon ./index.js",
-    "start:production": "node_env=production nodemon ./index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -16,7 +15,8 @@
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-react-views": "^0.11.0",
-    "mongoose": "^6.3.4",
+    "mongoose": "^6.3.5",
+    "multer": "^1.4.5-lts.1",
     "nodemon": "^2.0.16",
     "react": "^16.14.0",
     "react-dom": "^16.14.0"

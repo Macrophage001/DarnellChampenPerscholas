@@ -1,41 +1,54 @@
 import React from 'react'
 
-const Header = require('./components/header')
-const Footer = require('./components/footer')
+import Header from './components/header'
+import Content from './components/content'
+import Footer from './components/footer'
 
-const newStyle = {
-    margin: 0,
-    padding: 0,
-    boxSizing: 'border-box',
-    fontFamily: "'Roboto', sans-serif",
-    backgroundColor: '#EAEDED'
-}
-const formStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    margin: '4rem auto',
-
-    width: '24rem',
-    height: '24rem'
-}
-const formInputStyle = {
-    border: '1px solid #B5B5B5',
-    width: '14rem',
-    margin: '0.25rem 0',
-    height: '2rem'
-}
-const inputSubmitStyle = {
-    border: '1px solid #B5B5B5',
-    width: '14rem',
-    margin: '0.25rem 0',
-    height: '2rem'
-}
+const rootStyle = require('../styles/rootStyle')
+const {
+    formStyle,
+    formInputStyle,
+    textAreaStyle,
+    inputSubmitStyle,
+    inputLabelStyle,
+    divInputStyle
+} = require('../styles/editStyle')
 
 const navLinks = [
-    {title: 'Home', link: '/products'}
+    { title: 'Home', link: '/products' }
 ]
+
+
+function ProductForm() {
+    return (
+        <form style={formStyle} action={process.env.PRODUCT_API} method="POST">
+            <div style={divInputStyle}>
+                <label style={inputLabelStyle} htmlFor="name">Name:</label>
+                <input style={formInputStyle} type="text" name='name' />
+            </div>
+            <div style={divInputStyle}>
+                <label style={inputLabelStyle} htmlFor="description">Description:</label>
+                <textarea style={textAreaStyle} type="text" name='description' />
+            </div>
+            <div style={divInputStyle}>
+                <label style={inputLabelStyle} htmlFor="imgPath">Thumbnail:</label>
+                <input style={formInputStyle} type="text" name='imgPath' />
+            </div>
+            <div style={divInputStyle}>
+                <label style={inputLabelStyle} htmlFor="price">Price:</label>
+                <input style={formInputStyle} type="number" step={0.01} name='price' />
+            </div>
+            <div style={divInputStyle}>
+                <label style={inputLabelStyle} htmlFor="stock">Initial Stock:</label>
+                <input style={formInputStyle} type="number" name='stock' />
+            </div>
+            <input style={inputSubmitStyle} type="submit" value="Submit" />
+        </form>
+    );
+}
+
+const add = (x, y) => x + y;
+
 
 const New = () => (
     <html lang="en">
@@ -46,24 +59,15 @@ const New = () => (
             <link rel="preconnect" href="https://fonts.googleapis.com" />
             <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
             <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet" />
-            <title>Store App - New Product</title>
+            <title>EZ PC - New Product</title>
         </head>
-        <body style={newStyle}>
+        <body style={rootStyle}>
             <Header title="Submit New Product" links={navLinks} />
-
-            <form style={formStyle} action={process.env.PRODUCT_API} method="POST">
-                <input style={formInputStyle} type="text" name='name' placeholder='Name' />
-                <input style={formInputStyle} type="text" name='description' placeholder='Description' />
-                <input style={formInputStyle} type="text" name='imgPath' placeholder='Image' />
-                <input style={formInputStyle} type="number" step={0.01} name='price' placeholder='Price' />
-                <input style={formInputStyle} type="number" name='stock' placeholder='Stock' />
-                <input style={inputSubmitStyle} type="submit" value="Submit" />
-            </form>
-
+            <Content component={<ProductForm />} />
             <Footer />
         </body>
     </html>
 )
 
-module.exports = New
+export default New
 

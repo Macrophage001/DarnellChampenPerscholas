@@ -1,6 +1,6 @@
 const { Product } = require('../models/product')
 
-const tryCatch = (t, c = ((e) => console.error('Error: ', e))) => {
+const tryCatch = (t, c = (e => console.error('Error: ', e))) => {
     return function () {
         try {
             t(arguments)
@@ -9,6 +9,7 @@ const tryCatch = (t, c = ((e) => console.error('Error: ', e))) => {
         }
     }
 }
+const dbFilter = id => ({ name: id })
 
 const retrieveIndexPage = (req, resp) => {
     tryCatch(async () => {
@@ -26,7 +27,6 @@ const retrieveEditPage = (req, resp) => {
     })()
 }
 
-const dbFilter = id => ({ name: id })
 const retrieveShowProductPage = (req, resp) => {
     tryCatch(async () => {
         let product = await Product.findOne(dbFilter(req.params.id))

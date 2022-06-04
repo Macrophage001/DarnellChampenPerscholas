@@ -144,3 +144,49 @@ const sig = (() => {
     Object.defineProperty(Function.prototype, 'sig', { configurable: true, get: f }) // functionName.sig = may already have a property called sig = riskier
     return s
 })()
+
+const s = `
+P   A   H   N
+A P L S I I G
+Y   I   R
+`
+
+var convert = function (s, number) {
+    let lines = s
+        .split('\n')
+        .map(el => el.split(''))
+    console.log(lines)
+}
+
+convert(s)
+
+// const solution = (arr, s) => {
+//     let wordsMap = []
+//     for (let i = 0; i < arr.length; i++) {
+//         let wordMap = [];
+//         let word = arr[i];
+//         let lowestCount = Infinity
+//         for (let j = 0; j < word.length; j++) {
+//             let letter = word[j]
+//             let letterCount = 0;
+//             if (s.includes(letter)) {
+//                 for (let k = 0; k < s.length; k++) {
+//                     if (s[k] === letter) letterCount += 1
+//                 }
+//                 if (letterCount < lowestCount) {
+//                     lowestCount = letterCount
+//                 }
+//                 s = s.replace(letter, '')
+//             } else {
+//                 break;
+//             }
+//             wordMap.push(lowestCount)
+//         }
+//         if (Object.keys(wordMap).length === word.length) {
+//             wordsMap.push(wordMap[wordMap.length - 1])
+//         }
+//     }
+//     return wordsMap;
+// }
+
+// console.log(solution(["BILL", "BOB"], "BILLOBILLOLLOBBI"))
