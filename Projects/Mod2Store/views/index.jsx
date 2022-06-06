@@ -24,9 +24,9 @@ const Index = ({ products }) => (
         </head>
         <body style={rootStyle}>
             <Header title="EZ Parts" links={navLinks} />
-            <Content component={
+            <Content>
                 <ItemListing products={products} />
-            } />
+            </Content>
             <Footer />
         </body>
     </html>

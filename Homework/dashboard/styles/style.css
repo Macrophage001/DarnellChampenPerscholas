@@ -1,0 +1,169 @@
+:root {
+    --primary-color: #dddddd;
+    --secondary-color: #909090;
+}
+
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background: url(https://thebuzzonhr.com/wp-content/uploads/2014/09/purple-gradient-1.png) no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100vh;
+}
+
+.App {
+    width: 75rem;
+    height: 45rem;
+    box-shadow: 0 0 1rem 0 #00000033;
+    border-radius: 8px;
+    z-index: 1;
+    background: inherit;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+    padding: 1rem;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+}
+
+.App::before {
+    content: "";
+    position: absolute;
+    background: inherit;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: inset 0 0 2000px #2b2b2bc0;
+    background-color: #4d4d4dbb;
+}
+
+.side-menu {
+    border-radius: 8px;
+    position: relative;
+    z-index: 1;
+    background: inherit;
+    overflow: hidden;
+
+    width: 25%;
+}
+
+.side-menu::before {
+    content: "";
+    position: absolute;
+    background: inherit;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.side-menu nav,
+.side-menu nav ul {
+    width: 100%;
+    height: 100%;
+}
+
+.side-menu ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.side-menu ul li {
+    position: relative;
+    list-style: none;
+
+    left: 15%;
+
+    margin: 0.5rem 0;
+}
+
+.side-menu a {
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.display {
+    width: 75%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.upper-display {
+    display: flex;
+    height: 25%;
+}
+
+.upper-display>* {
+    margin: 0 1rem;
+}
+
+.lower-display {
+    height: 72.75%;
+}
+
+.lower-display>* {
+    margin: 1rem 1rem;
+}
+
+.info-container-small,
+.info-container-large {
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    position: relative;
+    z-index: 1;
+    background: inherit;
+    overflow: hidden;
+
+    background-color: rgba(44, 44, 44, 0.199);
+
+    height: 100%;
+
+    padding: 0 0.75rem;
+}
+
+.info-container-small::before,
+.info-container-large::before {
+    content: "";
+    position: absolute;
+    background: inherit;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: inset 0 0 2000px #2b2b2bc0;
+}
+
+.info-container-small>p {
+    text-align: center;
+}
+
+.info-container-small {
+    width: 100%;
+}
+
+h3,
+a {
+    color: #747474;
+}
+
+p {
+    color: #fff;
+}

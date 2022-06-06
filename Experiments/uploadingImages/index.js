@@ -12,7 +12,7 @@ const imageModel = require('./models/image')
 
 const port = process.env.port || 5000;
 
-const passWord = 'ygrgwkVhhrTLy62'
+const passWord = ''
 
 mongoose.connect(process.env.MONGO_URI.replace('<password>', passWord), { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.connection.once('open', () => console.log('Connected to Mongo!'))

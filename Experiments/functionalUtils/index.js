@@ -140,25 +140,16 @@ const sig = (() => {
         return `${params} ->${formattedReturn}`
     }
 
-    // Object.defineProperty(Function.prototype, s, { configurable: true, get: f }) // functionName[sig] = safer(?)
-    Object.defineProperty(Function.prototype, 'sig', { configurable: true, get: f }) // functionName.sig = may already have a property called sig = riskier
+    Object.defineProperty(Function.prototype, s, { configurable: true, get: f }) // functionName[sig] = safer(?)
+    // Object.defineProperty(Function.prototype, 'sig', { configurable: true, get: f }) // functionName.sig = may already have a property called sig = riskier
     return s
 })()
 
-const s = `
-P   A   H   N
-A P L S I I G
-Y   I   R
-`
-
-var convert = function (s, number) {
-    let lines = s
-        .split('\n')
-        .map(el => el.split(''))
-    console.log(lines)
+const add = (x, y) => {
+    return x + y;
 }
 
-convert(s)
+console.log(add[sig])
 
 // const solution = (arr, s) => {
 //     let wordsMap = []
@@ -188,5 +179,23 @@ convert(s)
 //     }
 //     return wordsMap;
 // }
-
 // console.log(solution(["BILL", "BOB"], "BILLOBILLOLLOBBI"))
+
+
+let food = [
+    'chicken', 'rice', 'vegetables'
+]
+
+food.map((foodItem, i) => {
+    console.log(foodItem)
+})
+
+// Chicken, rice, vegetables
+
+function myMap(arr, fn) {
+    let arr2 = [];
+    for (let i = 0; i < arr.length; i++) {
+        arr2.push(fn(arr[i], i));
+    }
+    return arr2;
+}

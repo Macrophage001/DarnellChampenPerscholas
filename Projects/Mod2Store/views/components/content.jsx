@@ -2,10 +2,10 @@ import React from 'react'
 
 const { contentStyle } = require('../../styles/contentStyle')
 
-const Content = ({ component }) => {
+const Content = (props) => {
     return (
         <div style={contentStyle}>
-            {component}
+            {props.children}
         </div>
     )
 }
