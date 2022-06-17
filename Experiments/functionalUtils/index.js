@@ -123,79 +123,47 @@ const highestUnder = (arr, limit) => {
 const sig = (() => {
     const s = Symbol('sig')
     const f = function () {
-        const paramRegex = /(?=\()(.*)(?=\))\)/g
-        const returnRegex = /(return)(.*)/g
-        let params = this.toString().match(paramRegex)[0]
-        let returns = this.toString().match(returnRegex)
-        let formattedReturn = ''
-        for (let i = 0; i < returns.length; i++) {
-            let ret = returns[i].replace('return', '')
-            if (i === returns.length - 1) {
-                formattedReturn += ret
-            } else {
-                formattedReturn += `${ret} | `
+        return function () {
+            const paramRegex = /(?=\()(.*)(?=\))\)/g
+            const returnRegex = /(return)(.*)/g
+            let params = this.toString().match(paramRegex)[0]
+            let returns = this.toString().match(returnRegex)
+            let formattedReturn = ''
+            for (let i = 0; i < returns.length; i++) {
+                let ret = returns[i].replace('return', '')
+                if (i === returns.length - 1) {
+                    formattedReturn += ret
+                } else {
+                    formattedReturn += `${ret} | `
+                }
             }
+            delete Function.prototype[s]
+            return `${params} ->${formattedReturn}`
         }
-        delete Function.prototype[s]
-        return `${params} ->${formattedReturn}`
     }
 
-    Object.defineProperty(Function.prototype, s, { configurable: true, get: f }) // functionName[sig] = safer(?)
-    // Object.defineProperty(Function.prototype, 'sig', { configurable: true, get: f }) // functionName.sig = may already have a property called sig = riskier
+    Object.defineProperty(Function.prototype, s, { configurable: true, get: f });
     return s
-})()
+})();
 
-const add = (x, y) => {
-    return x + y;
-}
-
-console.log(add[sig])
-
-// const solution = (arr, s) => {
-//     let wordsMap = []
-//     for (let i = 0; i < arr.length; i++) {
-//         let wordMap = [];
-//         let word = arr[i];
-//         let lowestCount = Infinity
-//         for (let j = 0; j < word.length; j++) {
-//             let letter = word[j]
-//             let letterCount = 0;
-//             if (s.includes(letter)) {
-//                 for (let k = 0; k < s.length; k++) {
-//                     if (s[k] === letter) letterCount += 1
-//                 }
-//                 if (letterCount < lowestCount) {
-//                     lowestCount = letterCount
-//                 }
-//                 s = s.replace(letter, '')
-//             } else {
-//                 break;
-//             }
-//             wordMap.push(lowestCount)
-//         }
-//         if (Object.keys(wordMap).length === word.length) {
-//             wordsMap.push(wordMap[wordMap.length - 1])
-//         }
+// function* range(start, end, step) {
+//     while (start < end) {
+//         yield start;
+//         start += step;
 //     }
-//     return wordsMap;
 // }
-// console.log(solution(["BILL", "BOB"], "BILLOBILLOLLOBBI"))
 
+// for (let i of range(0, 10, 2)) {
+//     console.log(i);
+// }
 
-let food = [
-    'chicken', 'rice', 'vegetables'
-]
-
-food.map((foodItem, i) => {
-    console.log(foodItem)
-})
-
-// Chicken, rice, vegetables
-
-function myMap(arr, fn) {
-    let arr2 = [];
-    for (let i = 0; i < arr.length; i++) {
-        arr2.push(fn(arr[i], i));
+const fibonacci = function* (numbers) {
+    let pre = 0, cur = 1;
+    while (numbers-- > 0) {
+        [pre, cur] = [cur, pre + cur];
+        yield cur;
     }
-    return arr2;
 }
+
+let [n1, n2, n3, ...others] = fibonacci(1000);
+console.log(n1);
