@@ -1,70 +1,28 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { useReducer } from 'react';
 import './App.css';
+import { DivOne } from './components/divOne';
+import { context } from './context';
 
-class DivThree extends Component {
-  state = {
-    tardis: {
-      name: 'Time and Relative Dimension in Space',
-      caps: false,
-    }
+const App = () => {
+  const reducer = (state, action) => {
+    const { type, payload } = action;
+    return {
+      'add': () => state + 1,
+      'subtract': () => state - 1,
+      'default': () => state,
+    }[type]();
   }
 
-  changeIt = (text) => {
-    if (this.state.tardis.caps) {
-      this.setState({
-        tardis: {
-          name: text.toLowerCase(),
-          caps: false
-        }
-      });
-    } else {
-      this.setState({
-        tardis: {
-          name: text.toUpperCase(),
-          caps: true
-        }
-      });
-    }
-  }
+  const [state, dispatch] = useReducer(reducer, 0);
 
-  render() {
-    return (
-      <div onClick={() => this.changeIt(this.state.tardis.name)}>
-        <h3>{this.state.tardis.name}</h3>
-      </div>
-    )
-  }
-}
-
-class DivTwo extends Component {
-  render() {
-    return (
-      <div>
-        <DivThree />
-        <DivThree />
-      </div>
-    )
-  }
-}
-
-class DivOne extends Component {
-  render() {
-    return (
-      <div>
-        <DivTwo />
-      </div>
-    )
-  }
-}
-
-class App extends Component {
-  render() {
-    return (
+  return (
+    <context.Provider value={{ state, dispatch }}>
       <div>
         <DivOne />
       </div>
-    )
-  }
+    </context.Provider>
+  )
 }
 
 export default App;

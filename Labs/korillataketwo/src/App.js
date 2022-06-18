@@ -11,72 +11,72 @@ const Receipt = ({ receipt, togglePaid }) => {
       <h3><span>Sauce: </span>{receipt.order.sauce}</h3>
       <h3><span>Drink: </span>{receipt.order.drink}</h3>
       <h3><span>Total: </span> ${receipt.order.cost}</h3>
+      <h3><span>Paid: </span>{receipt.paid ? 'Yes' : 'No'}</h3>
     </div>
   )
 }
 
 const App = () => {
-  const [receipts, setReceipts] = useState({
-    receipts: [
-      {
-        person: 'Karolin',
-        order: {
-          main: 'Burrito',
-          protein: 'Organic Tofu',
-          rice: 'Purple Rice',
-          sauce: 'Green Crack',
-          toppings: [
-            'Baby Bok Choy', 'Cucumber Kimchi'
-          ],
-          drink: 'Korchata',
-          cost: 22
-        },
-        paid: false
+  const [receipts, setReceipts] = useState([
+    {
+      person: 'Karolin',
+      order: {
+        main: 'Burrito',
+        protein: 'Organic Tofu',
+        rice: 'Purple Rice',
+        sauce: 'Green Crack',
+        toppings: [
+          'Baby Bok Choy', 'Cucumber Kimchi'
+        ],
+        drink: 'Korchata',
+        cost: 22
       },
-      {
-        person: 'Jerrica',
-        order: {
-          main: 'Rice Bowl',
-          protein: 'Ginger Soy Chix',
-          rice: 'Sticky Rice',
-          sauce: 'Korilla',
-          toppings: [
-            'Yuzu Pickled Sweet Pepper', 'Kale'
-          ],
-          drink: 'Korchata',
-          cost: 19
-        },
-        paid: false
+      paid: false
+    },
+    {
+      person: 'Jerrica',
+      order: {
+        main: 'Rice Bowl',
+        protein: 'Ginger Soy Chix',
+        rice: 'Sticky Rice',
+        sauce: 'Korilla',
+        toppings: [
+          'Yuzu Pickled Sweet Pepper', 'Kale'
+        ],
+        drink: 'Korchata',
+        cost: 19
       },
-      {
-        person: 'Matt',
-        order: {
-          main: 'Salad Bowl',
-          protein: 'Organic Tofu',
-          rice: 'none',
-          sauce: "K'lla",
-          toppings: [
-            'Blue Potato Salad', 'Pico De Gallo', 'Red Kimchi'
-          ],
-          drink: 'Sparkling Blood Orange Soda',
-          cost: 20
-        },
-        paid: true
-      }
-    ]
-  });
+      paid: false
+    },
+    {
+      person: 'Matt',
+      order: {
+        main: 'Salad Bowl',
+        protein: 'Organic Tofu',
+        rice: 'none',
+        sauce: "K'lla",
+        toppings: [
+          'Blue Potato Salad', 'Pico De Gallo', 'Red Kimchi'
+        ],
+        drink: 'Sparkling Blood Orange Soda',
+        cost: 20
+      },
+      paid: false
+    }
+  ]);
 
   const togglePaid = index => {
     let newReceipts = receipts;
-
+    console.log(newReceipts[index]);
     newReceipts[index].paid = !newReceipts[index].paid;
-    // console.log(receipts);
-    setReceipts({ receipts: newReceipts });
+    console.log(newReceipts[index]);
+    setReceipts(newReceipts);
+    console.log(receipts[index]);
   }
 
   return (
     <div className="app">
-      {receipts && receipts.map((receipt, i) => <Receipt togglePaid={() => this.togglePaid(i)} receipt={receipt} />)}
+      {receipts && receipts.map((receipt, i) => <Receipt togglePaid={() => togglePaid(i)} receipt={receipt} />)}
     </div>
   )
 }
