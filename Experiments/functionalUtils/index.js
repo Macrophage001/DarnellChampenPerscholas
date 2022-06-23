@@ -120,14 +120,16 @@ const highestUnder = (arr, limit) => {
     return { highest, index }
 }
 
+console.log(highestUnder([1, 2, 3, 4, 5, 6], 4));
+
 const sig = (() => {
     const s = Symbol('sig')
-    const f = function () {
+    const f = () => {
         return function () {
             const paramRegex = /(?=\()(.*)(?=\))\)/g
             const returnRegex = /(return)(.*)/g
-            let params = this.toString().match(paramRegex)[0]
-            let returns = this.toString().match(returnRegex)
+            let params = this.toString().match(paramRegex)[0];
+            let returns = this.toString().match(returnRegex);
             let formattedReturn = ''
             for (let i = 0; i < returns.length; i++) {
                 let ret = returns[i].replace('return', '')
@@ -137,14 +139,45 @@ const sig = (() => {
                     formattedReturn += `${ret} | `
                 }
             }
-            delete Function.prototype[s]
-            return `${params} ->${formattedReturn}`
+            delete Function.prototype[s];
+            return `${params} ->${formattedReturn}`;
         }
     }
 
     Object.defineProperty(Function.prototype, s, { configurable: true, get: f });
-    return s
+    return s;
 })();
+
+
+const add = function (x, y) {
+    return x + y;
+};
+
+console.log(add[sig]());
+
+const Apple = Symbol('apple');
+const Apple2 = Symbol('apple');
+const Multiply = Symbol();
+const Add = Symbol();
+
+console.log(Apple === Apple2);
+
+const Food = {
+    chicken: 1,
+    isGood: () => 'Yes, it is good.',
+    [Apple]: 2,
+    Multiply: (x, y) => x * y
+}
+
+Object.defineProperty(Food, Multiply, { value: 42, writable: false });
+Object.defineProperty(Food, Add, { value: (x, y) => x + y, writable: false });
+
+const isGoodFunction = Food['isGood'];
+
+console.log(Food['Multiply'](10, 20));
+console.log(Food.Multiply(10, 20));
+
+console.log(Food[Add](10, 20));
 
 // function* range(start, end, step) {
 //     while (start < end) {
@@ -166,4 +199,175 @@ const fibonacci = function* (numbers) {
 }
 
 let [n1, n2, n3, ...others] = fibonacci(1000);
-console.log(n1);
+
+javascript: (function () {
+    let mouseClicksPerSecond = 0;
+    let cpsTracker = 0;
+    let cpsEnd = (new Date()).getTime() + 1000;
+
+    let autoCookieClicker = setInterval(() => {
+        try {
+            Game.ClickCookie();
+            cpsTracker += Game.computedMouseCps;
+            let now = (new Date()).getTime();
+            if (now >= cpsEnd) {
+                cpsEnd = now + 1000;
+                mouseClicksPerSecond = cpsTracker;
+                cpsTracker = 0;
+            }
+        } catch (err) {
+            clearInterval();
+        }
+    }, 10);
+    let autoGoldenCookies = setInterval(() => {
+        try {
+            for (let h in Game.shimmers) {
+                if (Game.shimmers[h].type === "golden") {
+                    Game.shimmers[h].pop();
+                }
+            }
+        } catch (err) {
+            clearInterval();
+        }
+    }, 1000);
+    let autoReindeer = setInterval(() => {
+        try {
+            for (let h in Game.shimmers) {
+                if (Game.shimmers[h].type === "reindeer") {
+                    Game.shimmers[h].pop();
+                }
+            }
+        } catch (err) {
+            clearInterval();
+        }
+    }, 1000);
+    function getBuildingColorById(id) {
+        let productsArray = [...document.querySelector('#products').children];
+        productsArray.splice(0, 1);
+        return productsArray[id].children[2].children[3].style.color;
+    }
+    function buyLowestPPBuilding() {
+        let green = 'rgb(0, 255, 0)';
+        let greenBulkOption = [...document.querySelector('#storeBulk').children].filter(div => div.style.color === green)[0];
+        greenBulkOption.click();
+
+        var buildings = [];
+        Game.ObjectsById.forEach(function (building) {
+            if (building.price < Game.cookies && getBuildingColorById(building.id) === green) {
+                buildings.push({ id: building.id, price: building.price });
+            }
+        });
+        if (buildings.length > 0) Game.ObjectsById[buildings.sort((a, b) => { return a.price - b.price })[0].id].buy();
+    }
+
+    let autoBuyBU = setInterval(() => {
+        try {
+            buyLowestPPBuilding();
+        } catch (err) {
+            clearInterval();
+        }
+    }, 250);
+
+    function activateGodzamok() {
+        let buildingList = [0, 2, 3, 4, 5, 0, 0];
+        if (Game.hasGod('ruin')) {
+            for (let theBuilding in buildingList) {
+                let numCurrentBuilding = Game.ObjectsById[buildingList[theBuilding]].amount;
+
+                if (numCurrentBuilding >= 100) {
+                    let numCurrentBuildingsByHundred = parseInt(numCurrentBuilding / 100);
+                    if (numCurrentBuildingsByHundred > 6) {
+                        numCurrentBuildingsByHundred = 6;
+                    }
+                    l('storeBulkSell').click();
+                    l('storeBulkMax').click();
+                    Game.ObjectsById[buildingList[theBuilding]].sell(numCurrentBuilding);
+
+                    l('storeBulkBuy').click();
+                    l('storeBulk100').click();
+                    for (let i = 0; i < numCurrentBuildingsByHundred; i++) {
+                        Game.ObjectsById[buildingList[theBuilding]].buy();
+                    }
+                }
+            }
+        }
+    }
+    function initializeAutoGodzamok() {
+        if (Game.hasGod('ruin')) {
+            if ((
+                Game.hasBuff('Elder frenzy') ||
+                Game.hasBuff('Dragon Harvest') ||
+                Game.hasBuff('Click frenzy') ||
+                Game.hasBuff('Cursed finger') ||
+                Game.hasBuff('Dragonflight') ||
+                Game.hasBuff('High-five') ||
+                Game.hasBuff('Congregation') ||
+                Game.hasBuff('Luxuriant harvest') ||
+                Game.hasBuff('Ore vein') ||
+                Game.hasBuff('Oiled-up') ||
+                Game.hasBuff('Juicy profits') ||
+                Game.hasBuff('Fervent adoration') ||
+                Game.hasBuff('Manabloom') ||
+                Game.hasBuff('Delicious lifeforms') ||
+                Game.hasBuff('Breakthrough') ||
+                Game.hasBuff('Righteous cataclysm') ||
+                Game.hasBuff('Golden ages') ||
+                Game.hasBuff('Extra cycles') ||
+                Game.hasBuff('Solar flare') ||
+                Game.hasBuff('Winning streak')
+            ) && !Game.hasBuff('Devastation') && Game.hasBuff('Frenzy')) {
+                activateGodzamok();
+            }
+        }
+    }
+    let autoGodzamok = setInterval(() => {
+        try {
+            initializeAutoGodzamok();
+        } catch (err) {
+            console.log(err);
+            clearInterval();
+        }
+    });
+    function getFattestWrinklerId() {
+        let fattestWrinklerId = undefined;
+
+        for (let i = 0; i < Game.wrinklers.length; i++) {
+            let currWrinkler = Game.wrinklers[i];
+            let { sucked, type } = currWrinkler;
+
+            if (type || !sucked) {
+                continue;
+            }
+            if (fattestWrinklerId === undefined) {
+                fattestWrinklerId = i;
+                continue;
+            }
+            if (sucked > Game.wrinklers[fattestWrinklerId].sucked) {
+                fattestWrinklerId = i;
+            }
+        }
+        return fattestWrinklerId;
+    }
+    function getSuckingWrinklers() {
+        let currSuckingWrinklers = 0;
+        Game.wrinklers.forEach(wrinkler => {
+            if (wrinkler.sucked) {
+                currSuckingWrinklers++
+            }
+        });
+        return currSuckingWrinklers;
+    }
+    let autoWrinklers = setInterval(() => {
+        try {
+            if (Game.getWrinklerMax() == getSuckingWrinklers()) {
+                let fattestWrinklerId = getFattestWrinklerId();
+                console.log(fattestWrinklerId);
+                if (fattestWrinklerId !== undefined) {
+                    Game.wrinklers[fattestWrinklerId].hp = 0;
+                }
+            }
+        } catch (err) {
+            clearInterval();
+        }
+    }, 5000);
+})();

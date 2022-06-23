@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import './App.css';
 
-const Receipt = ({ receipt, togglePaid }) => {
+const Receipt = ({ togglePaid, index, receipt }) => {
+  console.log(receipt);
+
   return (
-    <div onClick={togglePaid} className="receipt" style={receipt.paid ? { display: 'none' } : { display: 'block' }}>
+    <div onClick={() => togglePaid(index)} className="receipt" style={receipt.paid ? { display: 'none' } : { display: 'block' }}>
       <h2>{receipt.person}</h2>
       <h3><span>Main: </span> {receipt.order.main}</h3>
       <h3><span>Protein: </span>{receipt.order.protein}</h3>
@@ -16,7 +18,7 @@ const Receipt = ({ receipt, togglePaid }) => {
   )
 }
 
-const App = () => {
+const App = function () {
   const [receipts, setReceipts] = useState([
     {
       person: 'Karolin',
@@ -63,20 +65,18 @@ const App = () => {
       },
       paid: false
     }
-  ]);
+  ])
 
   const togglePaid = index => {
-    let newReceipts = receipts;
-    console.log(newReceipts[index]);
-    newReceipts[index].paid = !newReceipts[index].paid;
-    console.log(newReceipts[index]);
-    setReceipts(newReceipts);
-    console.log(receipts[index]);
+    let receipt = receipts[index];
+    receipt.paid = !receipt.paid;
+    setReceipts([...receipts, receipt]);
+    console.log(receipt);
   }
 
   return (
     <div className="app">
-      {receipts && receipts.map((receipt, i) => <Receipt togglePaid={() => togglePaid(i)} receipt={receipt} />)}
+      {receipts && receipts.map((receipt, i) => <Receipt key={i} togglePaid={togglePaid} index={i} receipt={receipt} />)}
     </div>
   )
 }

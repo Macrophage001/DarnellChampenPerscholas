@@ -13,12 +13,12 @@ export const DivThree = () => {
         if (tardis.caps) {
             setTardis({
                 name: text.toLowerCase(),
-                caps: false
+                caps: false,
             });
         } else {
             setTardis({
                 name: text.toUpperCase(),
-                caps: true
+                caps: true,
             });
         }
         ctx.dispatch({ type: 'add', payload: null });
