@@ -155,30 +155,6 @@ const add = function (x, y) {
 
 console.log(add[sig]());
 
-const Apple = Symbol('apple');
-const Apple2 = Symbol('apple');
-const Multiply = Symbol();
-const Add = Symbol();
-
-console.log(Apple === Apple2);
-
-const Food = {
-    chicken: 1,
-    isGood: () => 'Yes, it is good.',
-    [Apple]: 2,
-    Multiply: (x, y) => x * y
-}
-
-Object.defineProperty(Food, Multiply, { value: 42, writable: false });
-Object.defineProperty(Food, Add, { value: (x, y) => x + y, writable: false });
-
-const isGoodFunction = Food['isGood'];
-
-console.log(Food['Multiply'](10, 20));
-console.log(Food.Multiply(10, 20));
-
-console.log(Food[Add](10, 20));
-
 // function* range(start, end, step) {
 //     while (start < end) {
 //         yield start;
