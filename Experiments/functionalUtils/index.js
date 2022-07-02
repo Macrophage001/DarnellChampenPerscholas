@@ -177,20 +177,9 @@ const fibonacci = function* (numbers) {
 let [n1, n2, n3, ...others] = fibonacci(1000);
 
 javascript: (function () {
-    let mouseClicksPerSecond = 0;
-    let cpsTracker = 0;
-    let cpsEnd = (new Date()).getTime() + 1000;
-
     let autoCookieClicker = setInterval(() => {
         try {
             Game.ClickCookie();
-            cpsTracker += Game.computedMouseCps;
-            let now = (new Date()).getTime();
-            if (now >= cpsEnd) {
-                cpsEnd = now + 1000;
-                mouseClicksPerSecond = cpsTracker;
-                cpsTracker = 0;
-            }
         } catch (err) {
             clearInterval();
         }
