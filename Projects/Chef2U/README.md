@@ -9,21 +9,36 @@ The web app would allow users to search for whatever food they're currently crav
 ## Wireframing
 
 <!-- Intro Screen -->
-
-<!-- ![Intro Screen](https://github.com/Macrophage001/DarnellChampenPerscholas/blob/master/Projects/Chef2U/wireframing/Intro%20Screen/Intro%20Screen.png) -->
+### Intro Screen
 <img src="https://github.com/Macrophage001/DarnellChampenPerscholas/blob/master/Projects/Chef2U/wireframing/Intro%20Screen/Intro%20Screen.png"
      alt="Intro Screen Image"
-     style="width: 50px; height: 50px;" />
+     style="width: 200px; height: 200px;" />
 
 
 <!-- Log In Screen -->
+### Log In Screen
+<img src="https://github.com/Macrophage001/DarnellChampenPerscholas/blob/master/Projects/Chef2U/wireframing/Log%20In%20Screen/MacBook%20Pro%2015.png"
+     alt="Intro Screen Image"
+     style="width: 200px; height: 200px;" />
 
 <!-- Main Screen -->
+### Main Screen
+<img src="https://github.com/Macrophage001/DarnellChampenPerscholas/blob/master/Projects/Chef2U/wireframing/Main%20Screen/Main%20Screen.png"
+     alt="Intro Screen Image"
+     style="width: 200px; height: 200px;" />
+
 
 <!-- Main Screen After Search -->
+### Main Screen After Search
+<img src="https://github.com/Macrophage001/DarnellChampenPerscholas/blob/master/Projects/Chef2U/wireframing/Main%20Screen%20After%20Search/Main%20Screen.png"
+     alt="Intro Screen Image"
+     style="width: 200px; height: 200px;" />
 
 <!-- Chef Screen -->
+### Chef Screen
 
 <!-- User Cart Screen -->
+### User Cart Screen
 
 <!-- Checkout Screen -->
+### Checkout Screen
