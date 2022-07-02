@@ -10,7 +10,11 @@ The web app would allow users to search for whatever food they're currently crav
 
 <!-- Intro Screen -->
 
-[Intro Screen](https://github.com/Macrophage001/DarnellChampenPerscholas/blob/master/Projects/Chef2U/wireframing/Intro%20Screen/Intro%20Screen.png)
+<!-- ![Intro Screen](https://github.com/Macrophage001/DarnellChampenPerscholas/blob/master/Projects/Chef2U/wireframing/Intro%20Screen/Intro%20Screen.png) -->
+<img src="https://github.com/Macrophage001/DarnellChampenPerscholas/blob/master/Projects/Chef2U/wireframing/Intro%20Screen/Intro%20Screen.png"
+     alt="Intro Screen Image"
+     style="width: 50px; height: 50px;" />
+
 
 <!-- Log In Screen -->
 
