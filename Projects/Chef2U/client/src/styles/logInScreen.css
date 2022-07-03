@@ -62,12 +62,36 @@
     padding: 1rem;
 }
 
+.form-customer-type {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-customer-type .type {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 1rem;
+}
+
 .form-customer-type input {
     margin: 0 1rem;
 }
 
 .form-customer-type img {
     width: 4rem;
+}
+
+form h2 {
+    color: #FF6B00;
+    font-family: 'Cascadia Code', sans-serif;
+    font-weight: lighter;
+
+    margin-top: 1rem;
+    text-align: center;
 }
 
 .authentication-buttons {

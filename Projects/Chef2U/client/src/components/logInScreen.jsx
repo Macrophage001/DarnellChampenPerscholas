@@ -6,7 +6,7 @@ import '../styles/logInScreen.css';
 import { tryCatch } from '../helper/util';
 
 const LogInForm = (props) => (
-    <form>
+    <form onSubmit={props.handleSubmit}>
         <input type="text" name='email' placeholder='Email...' value={props.email} onChange={props.handleChange} />
         <input type="text" name='password' placeholder='Password...' value={props.password} onChange={props.handleChange} />
         <input type="submit" value="Submit" style={{ display: 'none' }} />
@@ -19,11 +19,17 @@ const SignUpForm = (props) => (
         <input type="text" name='email' placeholder='Email...' value={props.email} onChange={props.handleChange} />
         <input type="text" name='password' placeholder='Password...' value={props.password} onChange={props.handleChange} />
         <input type="text" name='passwordConfirmation' placeholder='Confirm Password...' value={props.passwordConfirmation} onChange={props.handleChange} />
+
+        <h2>Are you a:</h2>
         <div className="form-customer-type">
-            <img src="/images/chef.png" alt="chef_image" />
-            <input type="radio" name='customerType' value="Chef" onChange={props.handleChange} />
-            <img src="/images/eating-disorder.png" alt="customer_image" />
-            <input type="radio" name='customerType' value="Customer" onChange={props.handleChange} />
+            <div className="type">
+                <img src="/images/chef.png" alt="chef_image" />
+                <input type="radio" name='customerType' value="Chef" onChange={props.handleChange} />
+            </div>
+            <div className="type">
+                <img src="/images/eating-disorder.png" alt="customer_image" />
+                <input type="radio" name='customerType' value="Customer" onChange={props.handleChange} />
+            </div>
         </div>
         <input type="submit" value="Submit" style={{ display: 'none' }} />
     </form>
@@ -31,7 +37,11 @@ const SignUpForm = (props) => (
 
 const LogInScreen = () => {
     const [authType, setAuthType] = useState('log-in');
-    const [authForm, setAuthForm] = useState(<></>);
+
+    const storeAuthToken = (response) => {
+        localStorage.setItem('user', JSON.stringify(response.data));
+        console.log(localStorage);
+    }
 
     const authTypeMap = {
         'log-in': () => {
@@ -47,7 +57,6 @@ const LogInScreen = () => {
             })();
         }
     }
-
 
     const [credentials, setCredentials] = useState({
         name: '',
@@ -65,37 +74,10 @@ const LogInScreen = () => {
         setCredentials(newCredentials);
     }
 
-    const storeAuthToken = (response) => {
-        console.log(response);
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('user', JSON.stringify(response.data.user));
+    const authTypeFormMap = {
+        'log-in': <LogInForm handleSubmit={authTypeMap[authType]} handleChange={handleChange} />,
+        'sign-up': <SignUpForm handleSubmit={authTypeMap[authType]} handleChange={handleChange} />
     }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // console.log(credentials);
-
-        authTypeMap[authType]();
-        // if (authType === 'log-in') {
-        //     tryCatch(async () => {
-        //         const response = await axios.post('/api/auth/login', credentials);
-        //         storeAuthToken(response);
-        //     })();
-        // } else {
-        //     tryCatch(async () => {
-        //         const response = await axios.post('/api/auth/signup', credentials);
-        //         storeAuthToken(response);
-        //     })();
-        // }
-    }
-
-    useEffect(() => {
-        if (authType === 'log-in') {
-            setAuthForm(<LogInForm handleChange={handleChange} handleSubmit={handleSubmit} />);
-        } else {
-            setAuthForm(<SignUpForm handleChange={handleChange} handleSubmit={handleSubmit} />);
-        }
-    }, [authType]);
 
     return (
         <div className="log-in-screen">
@@ -103,7 +85,7 @@ const LogInScreen = () => {
             <div className='log-in-screen-body'>
                 <div className='log-in-screen-body-authentication'>
                     {authType === 'log-in' ? <h1>Log In</h1> : <h1>Sign Up</h1>}
-                    {authForm}
+                    {authTypeFormMap[authType]}
                     <div className='authentication-buttons'>
                         <button onClick={() => setAuthType('sign-up')}>Sign Up</button>
                         <button onClick={() => setAuthType('log-in')}>Log In</button>
