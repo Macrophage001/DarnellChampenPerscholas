@@ -1,6 +1,7 @@
 import React from 'react'
 import IntroScreen from './components/introScreen';
-import LogInScreen from './components/logInScreen';
+import AuthenticationScreen from './components/authenticationScreen';
+import MainScreen from './components/mainScreen';
 
 import './styles/App.css';
 
@@ -8,7 +9,8 @@ const App = () => {
   return (
     <div>
       {/* <IntroScreen /> */}
-      <LogInScreen />
+      <AuthenticationScreen />
+      {/* <MainScreen /> */}
     </div>
   )
 }

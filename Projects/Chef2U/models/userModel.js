@@ -1,9 +1,17 @@
 const mongooose = require('mongoose');
 
 const UserSchema = new mongooose.Schema({
-    name: {
+    userName: {
         type: String,
-        required: false
+        required: true
+    },
+    firstName: {
+        type: String,
+        required: true
+    },
+    lastName: {
+        type: String,
+        required: true
     },
     email: {
         type: String,
@@ -13,6 +21,11 @@ const UserSchema = new mongooose.Schema({
         type: String,
         required: true
     },
+    avatar: {
+        data: Buffer,
+        contentType: String,
+        required: false
+    },
     date: {
         type: Date,
         default: Date.now
@@ -21,13 +34,13 @@ const UserSchema = new mongooose.Schema({
         type: Boolean,
         default: false
     },
-    isChef: {
-        type: Boolean,
-        default: false
+    customerType: {
+        type: String,
+        required: true
     },
-    isCustomer: {
-        type: Boolean,
-        default: false
+    yearsOfExperience: {
+        type: Number,
+        default: 0
     },
     specialties: {
         type: Array,
