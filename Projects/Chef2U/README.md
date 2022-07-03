@@ -42,3 +42,9 @@ The web app would allow users to search for whatever food they're currently crav
 
 <!-- Checkout Screen -->
 ### Checkout Screen
+
+
+### Attribution:
+<a href="https://www.flaticon.com/free-icons/arrow" title="arrow icons">Arrow icons created by th studio - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/chef" title="chef icons">Chef icons created by Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/eat" title="eat icons">Eat icons created by Flat Icons - Flaticon</a>

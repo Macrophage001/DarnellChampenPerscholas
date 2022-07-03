@@ -1,10 +1,15 @@
 import React from 'react'
-import './App.css';
+import IntroScreen from './components/introScreen';
+import LogInScreen from './components/logInScreen';
 
+import './styles/App.css';
 
 const App = () => {
   return (
-    <div></div>
+    <div>
+      {/* <IntroScreen /> */}
+      <LogInScreen />
+    </div>
   )
 }
 

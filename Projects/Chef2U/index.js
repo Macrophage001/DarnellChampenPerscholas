@@ -17,4 +17,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static('public'));
 
+const apiRoute = require('./routes/apiRoute');
+
+app.use('/api', apiRoute);
+
 app.listen(port, () => console.log('Listening on port: ' + port));
