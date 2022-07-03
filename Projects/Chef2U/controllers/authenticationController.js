@@ -1,9 +1,9 @@
-const { tryCatch } = require('../helper/util');
 const { User } = require('../models/userModel');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-// Will add proper validation later.
+const { tryCatch } = require('../helper/util');
+
 const passwordValidator = {
     simpleValidator: (password) => {
         return (userPassword) => {
@@ -24,7 +24,7 @@ const loginUser = (req, res) => {
             res.status(401).send('Invalid email or password');
             return;
         } else {
-            const isPasswordCorrect = await passwordValidator.bcrypt(user.password)(req.body.password);
+            const isPasswordCorrect = await passwordValidator.bcryptValidator(user.password)(req.body.password);
             if (!isPasswordCorrect) {
                 res.status(401).send('Invalid email or password');
                 return;
