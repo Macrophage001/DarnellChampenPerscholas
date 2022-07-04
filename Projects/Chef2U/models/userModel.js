@@ -49,9 +49,9 @@ const UserSchema = new mongooose.Schema({
     specialties: {
         type: Array,
         default: [
-            'American',
-            'Asian',
-            'Italian',
+            'american',
+            'asian',
+            'italian',
         ]
     },
     recipes: {
@@ -69,6 +69,8 @@ const UserSchema = new mongooose.Schema({
                     "Parsley",
                     "Olive Oil",
                 ],
+                price: 15.50,
+                image: "https://www.bbcgoodfood.com/sites/default/files/styles/recipe/public/recipe/recipe-image/2016/05/grilled-chicken-soup.jpg?itok=_ZjQ-_qB",
             },
             {
                 name: "Fried Rice",
@@ -79,6 +81,72 @@ const UserSchema = new mongooose.Schema({
                     "Parsley",
                     "Olive Oil",
                 ],
+                price: 11.99,
+                image: "https://www.bbcgoodfood.com/sites/default/files/styles/recipe/public/recipe/recipe-image/2016/05/grilled-chicken-soup.jpg?itok=_ZjQ-_qB",
+            },
+        ]
+    },
+    cart: {
+        type: Array,
+        default: [
+            {
+                name: "Grilled Chicken",
+                ingredients: [
+                    "Chicken",
+                    "Salt",
+                    "Pepper",
+                    "Garlic",
+                    "Onion",
+                    "Tomato",
+                    "Parsley",
+                    "Olive Oil",
+                ],
+                price: 15.50,
+                image: "https://www.bbcgoodfood.com/sites/default/files/styles/recipe/public/recipe/recipe-image/2016/05/grilled-chicken-soup.jpg?itok=_ZjQ-_qB",
+            },
+            {
+                name: "Fried Rice",
+                ingredients: [
+                    "Rice",
+                    "Onion",
+                    "Tomato",
+                    "Parsley",
+                    "Olive Oil",
+                ],
+                price: 11.99,
+                image: "https://www.bbcgoodfood.com/sites/default/files/styles/recipe/public/recipe/recipe-image/2016/05/grilled-chicken-soup.jpg?itok=_ZjQ-_qB",
+            },
+        ]
+    },
+    orderHistory: {
+        type: Array,
+        default: [
+            {
+                name: "Grilled Chicken",
+                ingredients: [
+                    "Chicken",
+                    "Salt",
+                    "Pepper",
+                    "Garlic",
+                    "Onion",
+                    "Tomato",
+                    "Parsley",
+                    "Olive Oil",
+                ],
+                price: 15.50,
+                image: "https://www.bbcgoodfood.com/sites/default/files/styles/recipe/public/recipe/recipe-image/2016/05/grilled-chicken-soup.jpg?itok=_ZjQ-_qB",
+            },
+            {
+                name: "Fried Rice",
+                ingredients: [
+                    "Rice",
+                    "Onion",
+                    "Tomato",
+                    "Parsley",
+                    "Olive Oil",
+                ],
+                price: 11.99,
+                image: "https://www.bbcgoodfood.com/sites/default/files/styles/recipe/public/recipe/recipe-image/2016/05/grilled-chicken-soup.jpg?itok=_ZjQ-_qB",
             },
         ]
     }

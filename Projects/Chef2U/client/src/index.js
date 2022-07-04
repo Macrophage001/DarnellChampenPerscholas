@@ -7,7 +7,7 @@ import './index.css';
 import App from './App';
 import MainScreen from './components/mainScreen';
 import AuthenticationScreen from './components/authenticationScreen';
-import AccountScreen from './components/accountScreen';
+import AccountScreen from './components/account/accountScreen';
 import Logout from './components/logout';
 
 const avatarNavLinks = [

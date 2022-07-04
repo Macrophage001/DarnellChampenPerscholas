@@ -1,24 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom';
-import { tryCatch } from '../helper/util';
-
 import axios from 'axios';
 
+import { tryCatch } from '../helper/util';
+
 import Avatar from './avatar';
+import SearchBar from './search/searchBar';
+import SearchResults from './search/searchResults';
 
 import '../styles/mainScreen.css';
-
-
-const SearchBar = ({ searchQuery, setSearchQuery, submitQuery }) => (
-    <form onSubmit={submitQuery} className='search-bar'>
-        <input type="text" name='search' value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder='What are you in the mood for...?' />
-        <img className='search-icon' src="\images\search.png" alt='search_icon' />
-        <input type="submit" value="Submit" style={{ display: 'none' }} />
-    </form>
-)
+import '../styles/searchResults.css';
 
 const MainScreen = ({ navLinks }) => {
     const [user, setUser] = useState({});
+    const [searchQuery, setSearchQuery] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
+    const [searchBarCompleteClassName, setSearchBarCompleteClassName] = useState('');
 
     const location = useLocation();
 
@@ -35,13 +32,29 @@ const MainScreen = ({ navLinks }) => {
         })();
     }, []);
 
+    const submitQuery = (e) => {
+        e.preventDefault();
+
+        tryCatch(async () => {
+            const response = await axios.get(`/api/search?query=${searchQuery}`);
+            if (response.data) {
+                setSearchResults(response.data);
+            } else {
+                setSearchResults([]);
+            }
+
+            setSearchBarCompleteClassName('on-search-complete');
+        })();
+    }
+
     return (
         <div className='main-screen'>
             <div className="main-screen-header" />
             <div className="main-screen-body">
                 <Avatar user={user} navLinks={navLinks} />
+                <SearchBar className={searchBarCompleteClassName} searchQuery={searchQuery} setSearchQuery={setSearchQuery} submitQuery={submitQuery} />
+                {searchResults && searchResults.length > 0 && <SearchResults searchResults={searchResults} />}
             </div>
-            <SearchBar />
         </div>
     )
 }
