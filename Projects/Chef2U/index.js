@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
+const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
@@ -36,7 +37,7 @@ app.use(require('cors')({
 app.use(cookieParser());
 app.use(expressSession({
     key: 'userId',
-    secret: 'secret',
+    secret: crypto.randomBytes(32).toString('hex'),
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -44,9 +45,6 @@ app.use(expressSession({
     }
 }));
 
-
-const apiRoute = require('./routes/apiRoute');
-
-app.use('/api', apiRoute);
+app.use('/api', require('./routes/apiRoute'));
 
 app.listen(port, () => console.log('Listening on port: ' + port));
