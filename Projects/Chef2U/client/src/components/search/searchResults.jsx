@@ -10,7 +10,7 @@ const SearchResults = ({ searchResults }) => {
             {searchResults.map((chef, index) => {
                 return (
                     <Card className='search-result-fade-in' key={index} chef={chef}>
-                        <img className='chef-image' src={chef.avatar ? `data:image/${chef.avatar.contentType};base64,${chef.avatar.data.toString('base64')}` : "\\images\\user.png"} alt="avatar" />
+                        <img className='chef-image' src={chef.avatar ? `data:image/${chef.avatar.contentType};base64,${chef.avatar.data.toString('base64')}` : "\\images\\chef.png"} alt="avatar" />
                         <h2>{`${chef.firstName} ${chef.lastName}`}</h2>
                         <Specialties chef={chef} />
                         <div className="chef-recipes">

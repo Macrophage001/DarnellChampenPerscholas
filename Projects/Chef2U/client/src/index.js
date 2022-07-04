@@ -21,7 +21,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />} />
+        <Route path="/" element={<App navLinks={avatarNavLinks} />} />
         <Route path="/home" element={<MainScreen navLinks={avatarNavLinks} />} />
         <Route path="/account" element={<AccountScreen navLinks={avatarNavLinks} />} />
         <Route path="/login" element={<AuthenticationScreen />} />

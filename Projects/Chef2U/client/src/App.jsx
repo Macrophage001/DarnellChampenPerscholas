@@ -3,10 +3,10 @@ import IntroScreen from './components/introScreen';
 
 import './styles/App.css';
 
-const App = () => {
+const App = ({ navLinks }) => {
   return (
     <div>
-      <IntroScreen />
+      <IntroScreen navLinks={navLinks} />
     </div>
   )
 }

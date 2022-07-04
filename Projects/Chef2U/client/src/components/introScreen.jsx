@@ -6,9 +6,14 @@ import { Link } from 'react-router-dom';
 import { tryCatch } from '../helper/util';
 
 import '../styles/introScreen.css';
+import MainScreen from './mainScreen';
+import AuthenticationScreen from './authenticationScreen';
 
-const IntroScreen = () => {
+const IntroScreen = ({ navLinks }) => {
     const [user, setUser] = useState(undefined);
+    const [component, setComponent] = useState(<></>);
+    const [className, setClassName] = useState('');
+
     useEffect(() => {
         tryCatch(async () => {
             const response = await axios.get('/api/auth/login');
@@ -20,13 +25,25 @@ const IntroScreen = () => {
         })();
     }, []);
 
+    const unlockWebPage = () => {
+        if (user) {
+            setComponent(<MainScreen user={user} navLinks={navLinks} />);
+        } else {
+            setComponent(<AuthenticationScreen />);
+        }
+        setClassName('unlocked');
+    }
+
     return (
-        <div className='intro-screen'>
-            <h1>Chef2U</h1>
-            <h2>Bringing <span>restaurant quality</span> food to <span>you</span>.</h2>
-            <Link to={user ? '/home' : '/login'} state={{ user }}>
-                <img src="\images\down-arrow.png" alt="down_arrow" />
-            </Link>
+        <div>
+            <div className={`intro-screen ${className}`}>
+                <h1>Chef2U</h1>
+                <h2>Bringing <span>restaurant quality</span> food to <span>you</span>.</h2>
+                <div onClick={unlockWebPage} className="unlock-button">
+                    <img src="\images\down-arrow.png" alt="down_arrow" />
+                </div>
+            </div>
+            {component}
         </div>
     )
 }
