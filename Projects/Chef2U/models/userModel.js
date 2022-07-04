@@ -21,6 +21,10 @@ const UserSchema = new mongooose.Schema({
         type: String,
         required: true
     },
+    isLoggedIn: {
+        type: Boolean,
+        default: false
+    },
     avatar: {
         data: Buffer,
         contentType: String,

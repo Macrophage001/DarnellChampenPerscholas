@@ -14,7 +14,7 @@ const passwordValidator = {
 
 const loginUser = (req, res) => {
     tryCatch(async () => {
-        const user = await User.findOne({ userName: req.body.userName });
+        const user = await User.findOneAndUpdate({ userName: req.body.userName }, { $set: { isLoggedIn: true } });
         if (!user) {
             res.status(401).send('Invalid email or password');
             return;
@@ -25,10 +25,18 @@ const loginUser = (req, res) => {
                 return;
             } else {
                 req.session.user = user;
-                console.log(req.session.user);
+                // console.log(req.session.user);
                 res.send(user);
             }
         }
+    })();
+}
+
+const logoutUser = (req, res) => {
+    tryCatch(async () => {
+        req.session.destroy();
+        const user = await User.findOneAndUpdate({ userName: req.body.userName }, { $set: { isLoggedIn: false } });
+        res.send(user);
     })();
 }
 
@@ -59,4 +67,4 @@ const signupUser = (req, res) => {
     })();
 }
 
-module.exports = { loginUser, getLoggedInUser, signupUser };
+module.exports = { loginUser, logoutUser, getLoggedInUser, signupUser };
