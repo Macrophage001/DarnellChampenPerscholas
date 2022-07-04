@@ -1,9 +1,10 @@
 const router = require('express').Router();
 
-const { loginUser, signupUser } = require('../controllers/authenticationController');
+const { loginUser, getLoggedInUser, signupUser } = require('../controllers/authenticationController');
 
 router.route('/login')
-    .post(loginUser);
+    .post(loginUser)
+    .get(getLoggedInUser);
 
 router.route('/signup')
     .post(signupUser);

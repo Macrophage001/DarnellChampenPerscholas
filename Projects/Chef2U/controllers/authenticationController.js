@@ -5,11 +5,6 @@ const saltRounds = 10;
 const { tryCatch } = require('../helper/util');
 
 const passwordValidator = {
-    simpleValidator: (password) => {
-        return (userPassword) => {
-            return userPassword === password;
-        }
-    },
     bcryptValidator: (hash) => {
         return async (userPassword) => {
             return await bcrypt.compare(userPassword, hash);
@@ -29,8 +24,20 @@ const loginUser = (req, res) => {
                 res.status(401).send('Invalid email or password');
                 return;
             } else {
+                req.session.user = user;
+                console.log(req.session.user);
                 res.send(user);
             }
+        }
+    })();
+}
+
+const getLoggedInUser = (req, res) => {
+    tryCatch(async () => {
+        if (req.session.user) {
+            res.send(req.session.user);
+        } else {
+            res.status(401).send('User not logged in');
         }
     })();
 }
@@ -52,4 +59,4 @@ const signupUser = (req, res) => {
     })();
 }
 
-module.exports = { loginUser, signupUser };
+module.exports = { loginUser, getLoggedInUser, signupUser };

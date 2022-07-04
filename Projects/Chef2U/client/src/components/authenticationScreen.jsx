@@ -39,6 +39,7 @@ const SignUpForm = (props) => (
 )
 
 const AuthenticationScreen = () => {
+    axios.defaults.withCredentials = true;
     const [authType, setAuthType] = useState('log-in');
     const navigate = useNavigate();
 
@@ -86,6 +87,15 @@ const AuthenticationScreen = () => {
         'log-in': <LogInForm handleSubmit={authTypeMap[authType]} handleChange={handleChange} />,
         'sign-up': <SignUpForm handleSubmit={authTypeMap[authType]} handleChange={handleChange} />
     }
+
+    useEffect(() => {
+        tryCatch(async () => {
+            const response = await axios.get('/api/auth/login');
+            if (response.data.user) {
+                navigate('/main-screen', { state: { user: response.data.user } });
+            }
+        })();
+    }, []);
 
     return (
         <div className="log-in-screen">

@@ -6,6 +6,7 @@ import './index.css';
 
 import App from './App';
 import MainScreen from './components/mainScreen';
+import AuthenticationScreen from './components/authenticationScreen';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,6 +15,7 @@ root.render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/main-screen" element={<MainScreen />} />
+        <Route path="/log-in-screen" element={<AuthenticationScreen />} />
         <Route path="*" element={<div>404</div>} />
       </Routes>
     </BrowserRouter>
