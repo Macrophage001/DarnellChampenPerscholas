@@ -103,6 +103,7 @@ const UserSchema = new mongooose.Schema({
                 ],
                 price: 15.50,
                 image: "https://www.bbcgoodfood.com/sites/default/files/styles/recipe/public/recipe/recipe-image/2016/05/grilled-chicken-soup.jpg?itok=_ZjQ-_qB",
+                count: 1
             },
             {
                 name: "Fried Rice",
@@ -115,6 +116,7 @@ const UserSchema = new mongooose.Schema({
                 ],
                 price: 11.99,
                 image: "https://www.bbcgoodfood.com/sites/default/files/styles/recipe/public/recipe/recipe-image/2016/05/grilled-chicken-soup.jpg?itok=_ZjQ-_qB",
+                count: 2
             },
         ]
     },

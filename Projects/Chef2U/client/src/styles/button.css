@@ -1,0 +1,20 @@
+.orange-button {
+    cursor: pointer;
+
+    background-color: #FF6B00;
+    border: none;
+    padding: 1rem;
+    margin: auto;
+    box-shadow: 0 2px 4px #646464;
+}
+
+.orange-button>* {
+    color: white;
+
+    font-family: 'Cascadia Code', sans-serif;
+    font-weight: lighter;
+}
+
+.orange-button:hover {
+    background-color: #ff7817;
+}

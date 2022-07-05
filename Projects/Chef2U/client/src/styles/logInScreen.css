@@ -104,30 +104,3 @@ form h2 {
     justify-content: center;
     align-items: center;
 }
-
-.authentication-buttons button {
-    cursor: pointer;
-
-    background-color: #FF6B00;
-    border: none;
-    padding: 1rem;
-    margin: auto;
-    color: white;
-    font-weight: lighter;
-    box-shadow: 0 2px 4px #646464;
-}
-
-.authentication-buttons button:hover {
-    background-color: #ff6a00;
-    animation: increase-box-shadow 150ms forwards;
-}
-
-@keyframes increase-box-shadow {
-    0% {
-        box-shadow: 0 2px 4px #646464;
-    }
-
-    100% {
-        box-shadow: 0 2px 6px #646464;
-    }
-}

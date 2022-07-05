@@ -36,7 +36,6 @@ const MainScreen = ({ navLinks }) => {
 
     const submitQuery = (e) => {
         e.preventDefault();
-
         tryCatch(async () => {
             const response = await axios.get(`/api/search?query=${searchQuery}`);
             if (response.data) {

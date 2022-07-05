@@ -3,8 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import '../styles/logInScreen.css';
+import '../styles/button.css';
 
 import { tryCatch } from '../helper/util';
+
+import Button from './button';
 
 const LogInForm = (props) => (
     <form onSubmit={props.handleSubmit}>
@@ -93,8 +96,8 @@ const AuthenticationScreen = () => {
                     {authType === 'log-in' ? <h1>Log In</h1> : <h1>Sign Up</h1>}
                     {authTypeFormMap[authType]}
                     <div className='authentication-buttons'>
-                        <button onClick={() => authType === 'sign-up' ? authTypeMap[authType]() : setAuthType('sign-up')}>Sign Up</button>
-                        <button onClick={() => authType === 'log-in' ? authTypeMap[authType]() : setAuthType('log-in')}>Log In</button>
+                        <Button label="Sign Up" onClick={() => authType === 'sign-up' ? authTypeMap[authType]() : setAuthType('sign-up')} />
+                        <Button label="Log In" onClick={() => authType === 'log-in' ? authTypeMap[authType]() : setAuthType('log-in')} />
                     </div>
                 </div>
             </div>

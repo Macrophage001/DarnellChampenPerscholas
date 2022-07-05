@@ -120,7 +120,7 @@ const highestUnder = (arr, limit) => {
     return { highest, index }
 }
 
-console.log(highestUnder([1, 2, 3, 4, 5, 6], 4));
+// console.log(highestUnder([1, 2, 3, 4, 5, 6], 4));
 
 const sig = (() => {
     const s = Symbol('sig')
@@ -148,12 +148,30 @@ const sig = (() => {
     return s;
 })();
 
+(() => {
+    const removeArrayElements = () => {
+        return function (...indices) {
+            let arr = this.slice();
+            for (let i = 0; i < indices.length; i++) {
+                arr.splice(indices[i], 1);
+            }
+            return arr;
+        }
+    }
+
+    Object.defineProperty(Array, 'remove', { configurable: true, get: removeArrayElements });
+})();
+
+
+
+// console.log([1, 2, 3, 4, 5, 6].remove(1, 2, 3));
+
 
 const add = function (x, y) {
     return x + y;
 };
 
-console.log(add[sig]());
+// console.log(add[sig]());
 
 // function* range(start, end, step) {
 //     while (start < end) {
@@ -176,163 +194,163 @@ const fibonacci = function* (numbers) {
 
 let [n1, n2, n3, ...others] = fibonacci(1000);
 
-javascript: (function () {
-    let autoCookieClicker = setInterval(() => {
-        try {
-            Game.ClickCookie();
-        } catch (err) {
-            clearInterval();
-        }
-    }, 10);
-    let autoGoldenCookies = setInterval(() => {
-        try {
-            for (let h in Game.shimmers) {
-                if (Game.shimmers[h].type === "golden") {
-                    Game.shimmers[h].pop();
-                }
-            }
-        } catch (err) {
-            clearInterval();
-        }
-    }, 1000);
-    let autoReindeer = setInterval(() => {
-        try {
-            for (let h in Game.shimmers) {
-                if (Game.shimmers[h].type === "reindeer") {
-                    Game.shimmers[h].pop();
-                }
-            }
-        } catch (err) {
-            clearInterval();
-        }
-    }, 1000);
-    function getBuildingColorById(id) {
-        let productsArray = [...document.querySelector('#products').children];
-        productsArray.splice(0, 1);
-        return productsArray[id].children[2].children[3].style.color;
-    }
-    function buyLowestPPBuilding() {
-        let green = 'rgb(0, 255, 0)';
-        let greenBulkOption = [...document.querySelector('#storeBulk').children].filter(div => div.style.color === green)[0];
-        greenBulkOption.click();
+// javascript: (function () {
+//     let autoCookieClicker = setInterval(() => {
+//         try {
+//             Game.ClickCookie();
+//         } catch (err) {
+//             clearInterval();
+//         }
+//     }, 10);
+//     let autoGoldenCookies = setInterval(() => {
+//         try {
+//             for (let h in Game.shimmers) {
+//                 if (Game.shimmers[h].type === "golden") {
+//                     Game.shimmers[h].pop();
+//                 }
+//             }
+//         } catch (err) {
+//             clearInterval();
+//         }
+//     }, 1000);
+//     let autoReindeer = setInterval(() => {
+//         try {
+//             for (let h in Game.shimmers) {
+//                 if (Game.shimmers[h].type === "reindeer") {
+//                     Game.shimmers[h].pop();
+//                 }
+//             }
+//         } catch (err) {
+//             clearInterval();
+//         }
+//     }, 1000);
+//     function getBuildingColorById(id) {
+//         let productsArray = [...document.querySelector('#products').children];
+//         productsArray.splice(0, 1);
+//         return productsArray[id].children[2].children[3].style.color;
+//     }
+//     function buyLowestPPBuilding() {
+//         let green = 'rgb(0, 255, 0)';
+//         let greenBulkOption = [...document.querySelector('#storeBulk').children].filter(div => div.style.color === green)[0];
+//         greenBulkOption.click();
 
-        var buildings = [];
-        Game.ObjectsById.forEach(function (building) {
-            if (building.price < Game.cookies && getBuildingColorById(building.id) === green) {
-                buildings.push({ id: building.id, price: building.price });
-            }
-        });
-        if (buildings.length > 0) Game.ObjectsById[buildings.sort((a, b) => { return a.price - b.price })[0].id].buy();
-    }
+//         var buildings = [];
+//         Game.ObjectsById.forEach(function (building) {
+//             if (building.price < Game.cookies && getBuildingColorById(building.id) === green) {
+//                 buildings.push({ id: building.id, price: building.price });
+//             }
+//         });
+//         if (buildings.length > 0) Game.ObjectsById[buildings.sort((a, b) => { return a.price - b.price })[0].id].buy();
+//     }
 
-    let autoBuyBU = setInterval(() => {
-        try {
-            buyLowestPPBuilding();
-        } catch (err) {
-            clearInterval();
-        }
-    }, 250);
+//     let autoBuyBU = setInterval(() => {
+//         try {
+//             buyLowestPPBuilding();
+//         } catch (err) {
+//             clearInterval();
+//         }
+//     }, 250);
 
-    function activateGodzamok() {
-        let buildingList = [0, 2, 3, 4, 5, 0, 0];
-        if (Game.hasGod('ruin')) {
-            for (let theBuilding in buildingList) {
-                let numCurrentBuilding = Game.ObjectsById[buildingList[theBuilding]].amount;
+//     function activateGodzamok() {
+//         let buildingList = [0, 2, 3, 4, 5, 0, 0];
+//         if (Game.hasGod('ruin')) {
+//             for (let theBuilding in buildingList) {
+//                 let numCurrentBuilding = Game.ObjectsById[buildingList[theBuilding]].amount;
 
-                if (numCurrentBuilding >= 100) {
-                    let numCurrentBuildingsByHundred = parseInt(numCurrentBuilding / 100);
-                    if (numCurrentBuildingsByHundred > 6) {
-                        numCurrentBuildingsByHundred = 6;
-                    }
-                    l('storeBulkSell').click();
-                    l('storeBulkMax').click();
-                    Game.ObjectsById[buildingList[theBuilding]].sell(numCurrentBuilding);
+//                 if (numCurrentBuilding >= 100) {
+//                     let numCurrentBuildingsByHundred = parseInt(numCurrentBuilding / 100);
+//                     if (numCurrentBuildingsByHundred > 6) {
+//                         numCurrentBuildingsByHundred = 6;
+//                     }
+//                     l('storeBulkSell').click();
+//                     l('storeBulkMax').click();
+//                     Game.ObjectsById[buildingList[theBuilding]].sell(numCurrentBuilding);
 
-                    l('storeBulkBuy').click();
-                    l('storeBulk100').click();
-                    for (let i = 0; i < numCurrentBuildingsByHundred; i++) {
-                        Game.ObjectsById[buildingList[theBuilding]].buy();
-                    }
-                }
-            }
-        }
-    }
-    function initializeAutoGodzamok() {
-        if (Game.hasGod('ruin')) {
-            if ((
-                Game.hasBuff('Elder frenzy') ||
-                Game.hasBuff('Dragon Harvest') ||
-                Game.hasBuff('Click frenzy') ||
-                Game.hasBuff('Cursed finger') ||
-                Game.hasBuff('Dragonflight') ||
-                Game.hasBuff('High-five') ||
-                Game.hasBuff('Congregation') ||
-                Game.hasBuff('Luxuriant harvest') ||
-                Game.hasBuff('Ore vein') ||
-                Game.hasBuff('Oiled-up') ||
-                Game.hasBuff('Juicy profits') ||
-                Game.hasBuff('Fervent adoration') ||
-                Game.hasBuff('Manabloom') ||
-                Game.hasBuff('Delicious lifeforms') ||
-                Game.hasBuff('Breakthrough') ||
-                Game.hasBuff('Righteous cataclysm') ||
-                Game.hasBuff('Golden ages') ||
-                Game.hasBuff('Extra cycles') ||
-                Game.hasBuff('Solar flare') ||
-                Game.hasBuff('Winning streak')
-            ) && !Game.hasBuff('Devastation') && Game.hasBuff('Frenzy')) {
-                activateGodzamok();
-            }
-        }
-    }
-    let autoGodzamok = setInterval(() => {
-        try {
-            initializeAutoGodzamok();
-        } catch (err) {
-            console.log(err);
-            clearInterval();
-        }
-    });
-    function getFattestWrinklerId() {
-        let fattestWrinklerId = undefined;
+//                     l('storeBulkBuy').click();
+//                     l('storeBulk100').click();
+//                     for (let i = 0; i < numCurrentBuildingsByHundred; i++) {
+//                         Game.ObjectsById[buildingList[theBuilding]].buy();
+//                     }
+//                 }
+//             }
+//         }
+//     }
+//     function initializeAutoGodzamok() {
+//         if (Game.hasGod('ruin')) {
+//             if ((
+//                 Game.hasBuff('Elder frenzy') ||
+//                 Game.hasBuff('Dragon Harvest') ||
+//                 Game.hasBuff('Click frenzy') ||
+//                 Game.hasBuff('Cursed finger') ||
+//                 Game.hasBuff('Dragonflight') ||
+//                 Game.hasBuff('High-five') ||
+//                 Game.hasBuff('Congregation') ||
+//                 Game.hasBuff('Luxuriant harvest') ||
+//                 Game.hasBuff('Ore vein') ||
+//                 Game.hasBuff('Oiled-up') ||
+//                 Game.hasBuff('Juicy profits') ||
+//                 Game.hasBuff('Fervent adoration') ||
+//                 Game.hasBuff('Manabloom') ||
+//                 Game.hasBuff('Delicious lifeforms') ||
+//                 Game.hasBuff('Breakthrough') ||
+//                 Game.hasBuff('Righteous cataclysm') ||
+//                 Game.hasBuff('Golden ages') ||
+//                 Game.hasBuff('Extra cycles') ||
+//                 Game.hasBuff('Solar flare') ||
+//                 Game.hasBuff('Winning streak')
+//             ) && !Game.hasBuff('Devastation') && Game.hasBuff('Frenzy')) {
+//                 activateGodzamok();
+//             }
+//         }
+//     }
+//     let autoGodzamok = setInterval(() => {
+//         try {
+//             initializeAutoGodzamok();
+//         } catch (err) {
+//             console.log(err);
+//             clearInterval();
+//         }
+//     });
+//     function getFattestWrinklerId() {
+//         let fattestWrinklerId = undefined;
 
-        for (let i = 0; i < Game.wrinklers.length; i++) {
-            let currWrinkler = Game.wrinklers[i];
-            let { sucked, type } = currWrinkler;
+//         for (let i = 0; i < Game.wrinklers.length; i++) {
+//             let currWrinkler = Game.wrinklers[i];
+//             let { sucked, type } = currWrinkler;
 
-            if (type || !sucked) {
-                continue;
-            }
-            if (fattestWrinklerId === undefined) {
-                fattestWrinklerId = i;
-                continue;
-            }
-            if (sucked > Game.wrinklers[fattestWrinklerId].sucked) {
-                fattestWrinklerId = i;
-            }
-        }
-        return fattestWrinklerId;
-    }
-    function getSuckingWrinklers() {
-        let currSuckingWrinklers = 0;
-        Game.wrinklers.forEach(wrinkler => {
-            if (wrinkler.sucked) {
-                currSuckingWrinklers++
-            }
-        });
-        return currSuckingWrinklers;
-    }
-    let autoWrinklers = setInterval(() => {
-        try {
-            if (Game.getWrinklerMax() == getSuckingWrinklers()) {
-                let fattestWrinklerId = getFattestWrinklerId();
-                console.log(fattestWrinklerId);
-                if (fattestWrinklerId !== undefined) {
-                    Game.wrinklers[fattestWrinklerId].hp = 0;
-                }
-            }
-        } catch (err) {
-            clearInterval();
-        }
-    }, 5000);
-})();
+//             if (type || !sucked) {
+//                 continue;
+//             }
+//             if (fattestWrinklerId === undefined) {
+//                 fattestWrinklerId = i;
+//                 continue;
+//             }
+//             if (sucked > Game.wrinklers[fattestWrinklerId].sucked) {
+//                 fattestWrinklerId = i;
+//             }
+//         }
+//         return fattestWrinklerId;
+//     }
+//     function getSuckingWrinklers() {
+//         let currSuckingWrinklers = 0;
+//         Game.wrinklers.forEach(wrinkler => {
+//             if (wrinkler.sucked) {
+//                 currSuckingWrinklers++
+//             }
+//         });
+//         return currSuckingWrinklers;
+//     }
+//     let autoWrinklers = setInterval(() => {
+//         try {
+//             if (Game.getWrinklerMax() == getSuckingWrinklers()) {
+//                 let fattestWrinklerId = getFattestWrinklerId();
+//                 console.log(fattestWrinklerId);
+//                 if (fattestWrinklerId !== undefined) {
+//                     Game.wrinklers[fattestWrinklerId].hp = 0;
+//                 }
+//             }
+//         } catch (err) {
+//             clearInterval();
+//         }
+//     }, 5000);
+// })();

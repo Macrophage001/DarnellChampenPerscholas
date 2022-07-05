@@ -25,7 +25,6 @@ const loginUser = (req, res) => {
                 return;
             } else {
                 req.session.user = user;
-                // console.log(req.session.user);
                 res.send(user);
             }
         }

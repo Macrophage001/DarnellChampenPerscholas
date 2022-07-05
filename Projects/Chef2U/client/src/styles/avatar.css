@@ -87,6 +87,7 @@
     box-shadow: 0 2px 4px #b4b4b4;
 
     width: 100%;
+    background-color: #fff;
 
     transform: scaleY(0);
     transform-origin: top;
