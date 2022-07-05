@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 import { tryCatch } from '../helper/util';
@@ -7,9 +7,11 @@ import { tryCatch } from '../helper/util';
 import Avatar from './avatar';
 import SearchBar from './search/searchBar';
 import SearchResults from './search/searchResults';
+import NavBar from './navBar';
 
 import '../styles/mainScreen.css';
 import '../styles/searchResults.css';
+
 
 const MainScreen = ({ navLinks }) => {
     const [user, setUser] = useState({});
@@ -51,6 +53,7 @@ const MainScreen = ({ navLinks }) => {
         <div className='main-screen'>
             <div className="main-screen-header" />
             <div className="main-screen-body">
+                <NavBar user={user} />
                 <Avatar user={user} navLinks={navLinks} />
                 <SearchBar className={searchBarCompleteClassName} searchQuery={searchQuery} setSearchQuery={setSearchQuery} submitQuery={submitQuery} />
                 {searchResults && searchResults.length > 0 && <SearchResults searchResults={searchResults} />}
