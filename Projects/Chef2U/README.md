@@ -53,3 +53,4 @@ The web app would allow users to search for whatever food they're currently crav
 <a href="https://www.flaticon.com/free-icons/box" title="box icons">Box icons created by Freepik - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/lock" title="lock icons">Lock icons created by Pixel perfect - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/credit-card" title="credit card icons">Credit card icons created by Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/star" title="star icons">Star icons created by Maxim Basinski Premium - Flaticon</a>

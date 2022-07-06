@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, createContext } from 'react'
 import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
@@ -12,6 +12,7 @@ import NavBar from './navBar';
 import '../styles/mainScreen.css';
 import '../styles/searchResults.css';
 
+import { searchResultsOnClickContext } from '../context/searchResultContext';
 
 const MainScreen = ({ navLinks }) => {
     const [user, setUser] = useState({});
@@ -48,6 +49,10 @@ const MainScreen = ({ navLinks }) => {
         })();
     }
 
+    const handleClickOnCard = (chef) => {
+        console.log('clicked', chef.userName);
+    }
+
     return (
         <div className='main-screen'>
             <div className="main-screen-header" />
@@ -55,7 +60,9 @@ const MainScreen = ({ navLinks }) => {
                 <NavBar user={user} />
                 <Avatar user={user} navLinks={navLinks} />
                 <SearchBar className={searchBarCompleteClassName} searchQuery={searchQuery} setSearchQuery={setSearchQuery} submitQuery={submitQuery} />
-                {searchResults && searchResults.length > 0 && <SearchResults searchResults={searchResults} />}
+                <searchResultsOnClickContext.Provider value={{ handleClickOnCard }}>
+                    {searchResults && searchResults.length > 0 && <SearchResults user={user} searchResults={searchResults} />}
+                </searchResultsOnClickContext.Provider>
             </div>
         </div>
     )

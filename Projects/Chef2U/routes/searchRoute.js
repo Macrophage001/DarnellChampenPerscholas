@@ -5,15 +5,11 @@ const { tryCatch } = require('../helper/util');
 
 router.route('/')
     .get((req, res) => {
-        console.log(req.query);
-
         tryCatch(async () => {
-            const usersBySpecialties = await User.find({ specialties: { $in: req.query.query } });
-            const usersByRecipes = (await User.find({})).filter(user =>
-                user.recipes
-                    .some(recipe => recipe.name.includes(req.query.query) || recipe.ingredients.some(ingredient => ingredient.includes(req.query.query)))
-            );
-            res.json([...usersBySpecialties, ...usersByRecipes]);
+            const matchingChefs = await User.find({
+                isChef: true, $or: [{ specialties: { $regex: req.query.query } }, { recipes: { $elemMatch: { name: { $regex: req.query.query } } } }]
+            });
+            res.send(matchingChefs);
         })();
     });
 

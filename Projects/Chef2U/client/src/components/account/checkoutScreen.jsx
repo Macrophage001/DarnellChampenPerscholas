@@ -9,7 +9,7 @@ import '../../styles/mainScreen.css';
 import '../../styles/checkoutScreen.css';
 import '../../styles/button.css';
 
-import { tryCatch } from '../../helper/util';
+import { tryCatch, ArrayExtension } from '../../helper/util';
 import Button from '../button';
 import Card from '../card';
 
@@ -20,18 +20,19 @@ const format = (new Intl.NumberFormat('en-US', {
 })).format;
 
 const CheckoutDisplayOrders = ({ user }) => {
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState(new ArrayExtension());
 
     const updateItemCount = (item, add) => {
         tryCatch(async () => {
             let count = item.count + add;
 
-            let newCart = [];
+            let newCart = new ArrayExtension(...cart);
             if (count < 1) {
                 count = 0;
-                newCart = Array.remove(cart, cart.indexOf(item));
+                const index = newCart.indexOf(item);
+                newCart = newCart.remove(index);
             } else {
-                newCart = [...cart];
+                newCart = new ArrayExtension(...cart);
                 newCart.forEach(i => {
                     if (i.name === item.name) {
                         i.count = count;
@@ -39,7 +40,7 @@ const CheckoutDisplayOrders = ({ user }) => {
                 });
             }
             setCart(newCart);
-            await axios.put(`/api/orders`, { user, cart });
+            await axios.put(`/api/orders`, { user, newCart });
         })();
     }
 
@@ -49,7 +50,7 @@ const CheckoutDisplayOrders = ({ user }) => {
 
     return (
         <div className='checkout-display-orders'>
-            {cart && cart.map((item, index) => {
+            {user.cart && user.cart.map((item, index) => {
                 return (
                     <Card className='order' key={index}>
                         <img src="\images\preview_food.jpg" alt="cart_food_image" />
@@ -81,18 +82,22 @@ const OrderSummaryItems = (props) => {
     const { cart, summary: { cleanUpService, serviceFee } } = props;
     return (
         <div className='checkout-display-order-summary-items'>
-            <div className='checkout-display-order-summary-item'>
-                <p>Items:</p>
-                <p>{cart ? format(cart.reduce((prev, next) => prev.price + next.price)) : "0"}</p>
-            </div>
-            <div className='checkout-display-order-summary-item'>
-                <p>Clean Up Service:</p>
-                <p>{format(cleanUpService)}</p>
-            </div>
-            <div className='checkout-display-order-summary-item'>
-                <p>Service Fee:</p>
-                <p>{format(serviceFee)}</p>
-            </div>
+            {cart && cart.length > 0 && (
+                <>
+                    <div className='checkout-display-order-summary-item'>
+                        <p>Items:</p>
+                        <p>{cart && cart.length > 0 ? format(cart.reduce((prev, next) => prev.price + next.price)) : "0"}</p>
+                    </div>
+                    <div className='checkout-display-order-summary-item'>
+                        <p>Clean Up Service:</p>
+                        <p>{format(cleanUpService)}</p>
+                    </div>
+                    <div className='checkout-display-order-summary-item'>
+                        <p>Service Fee:</p>
+                        <p>{format(serviceFee)}</p>
+                    </div>
+                </>
+            )}
         </div>
     );
 }

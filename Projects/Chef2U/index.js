@@ -8,7 +8,7 @@ const multer = require('multer');
 const cookieParser = require('cookie-parser');
 const expressSession = require('express-session');
 
-const password = "PASSWORDHERE";
+const password = "ygrgwkVhhrTLy62";
 
 const app = express();
 const port = process.env.port || 5000;

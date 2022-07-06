@@ -148,28 +148,34 @@ const sig = (() => {
     return s;
 })();
 
-(() => {
-    const removeArrayElements = () => {
-        return function (...indices) {
-            let arr = this.slice();
+class ArrayExtension extends Array {
+    remove(...indices) {
+        const removeArrayElements = (arr) => {
+            let copyArr = arr.slice();
             for (let i = 0; i < indices.length; i++) {
-                arr.splice(indices[i], 1);
+                copyArr.splice(indices[i], 1);
             }
-            return arr;
+            return copyArr;
         }
+        return removeArrayElements(this);
     }
-
-    Object.defineProperty(Array, 'remove', { configurable: true, get: removeArrayElements });
-})();
-
-
+    deepCopy() {
+        const deepCopyArray = (arr) => {
+            let newArr = [];
+            for (let i = 0; i < arr.length; i++) {
+                if (typeof arr[i] === 'object') {
+                    newArr[i] = deepCopyArray(arr[i]);
+                } else {
+                    newArr[i] = arr[i];
+                }
+            }
+            return newArr;
+        }
+        return deepCopyArray(this);
+    }
+}
 
 // console.log([1, 2, 3, 4, 5, 6].remove(1, 2, 3));
-
-
-const add = function (x, y) {
-    return x + y;
-};
 
 // console.log(add[sig]());
 
@@ -184,15 +190,15 @@ const add = function (x, y) {
 //     console.log(i);
 // }
 
-const fibonacci = function* (numbers) {
-    let pre = 0, cur = 1;
-    while (numbers-- > 0) {
-        [pre, cur] = [cur, pre + cur];
-        yield cur;
-    }
-}
+// const fibonacci = function* (numbers) {
+//     let pre = 0, cur = 1;
+//     while (numbers-- > 0) {
+//         [pre, cur] = [cur, pre + cur];
+//         yield cur;
+//     }
+// }
 
-let [n1, n2, n3, ...others] = fibonacci(1000);
+// let [n1, n2, n3, ...others] = fibonacci(1000);
 
 // javascript: (function () {
 //     let autoCookieClicker = setInterval(() => {

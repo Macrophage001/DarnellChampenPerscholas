@@ -1,12 +1,12 @@
 import React from 'react'
 
-const Recipe = (props) => {
+const Recipe = ({ recipe }) => {
     return (
         <div className="chef-recipe">
             <img src="/images/preview_food.jpg" alt="chef_image" />
             <div className="recipe-info">
-                <h3>{props.recipe.name}</h3>
-                <p>Price: {props.recipe.price}</p>
+                <h3>{recipe.name}</h3>
+                <p>Price: {recipe.price}</p>
             </div>
         </div>
     );

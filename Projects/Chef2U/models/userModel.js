@@ -1,5 +1,22 @@
 const mongooose = require('mongoose');
 
+const RecipesSchema = new mongooose.Schema({
+    name: String,
+    ingredients: [String],
+    steps: [String],
+    image: String,
+    category: String,
+});
+
+const CartItemSchema = new mongooose.Schema({
+    item: {
+        name: String,
+        image: String,
+        price: Number,
+    },
+    quantity: Number,
+});
+
 const UserSchema = new mongooose.Schema({
     userName: {
         type: String,
@@ -54,6 +71,7 @@ const UserSchema = new mongooose.Schema({
             'italian',
         ]
     },
+    // recipes: [RecipesSchema],
     recipes: {
         type: Array,
         default: [
@@ -86,6 +104,7 @@ const UserSchema = new mongooose.Schema({
             },
         ]
     },
+    // cart: [CartItemSchema],
     cart: {
         type: Array,
         default: [
