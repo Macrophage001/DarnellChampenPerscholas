@@ -23,24 +23,28 @@ const CheckoutDisplayOrders = ({ user }) => {
     const [cart, setCart] = useState(new ArrayExtension());
 
     const updateItemCount = (item, add) => {
-        tryCatch(async () => {
-            let count = item.count + add;
+        console.log("Cart: ", cart);
 
+        tryCatch(async () => {
+            let newCount = item.count + add;
             let newCart = new ArrayExtension(...cart);
-            if (count < 1) {
-                count = 0;
+            if (newCount < 1) {
+                newCount = 0;
                 const index = newCart.indexOf(item);
                 newCart = newCart.remove(index);
             } else {
                 newCart = new ArrayExtension(...cart);
                 newCart.forEach(i => {
                     if (i.name === item.name) {
-                        i.count = count;
+                        i.count = newCount;
                     }
                 });
             }
-            setCart(newCart);
-            await axios.put(`/api/orders`, { user, newCart });
+            const response = await axios.put('/api/cart/update', {
+                userId: user._id,
+                newCart,
+            });
+            setCart(new ArrayExtension(...response.data));
         })();
     }
 

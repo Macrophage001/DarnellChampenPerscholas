@@ -17,6 +17,12 @@ const CartItemSchema = new mongooose.Schema({
     quantity: Number,
 });
 
+const ReviewSchema = new mongooose.Schema({
+    rating: { type: Number, min: 1, max: 5, required: true, default: 5 },
+    comment: { type: String, required: true, default: 'No comment' },
+    user: String,
+});
+
 const UserSchema = new mongooose.Schema({
     userName: {
         type: String,
@@ -63,6 +69,35 @@ const UserSchema = new mongooose.Schema({
         type: Number,
         default: 0
     },
+    rating: {
+        type: Number,
+        default: 0
+    },
+    reviews: {
+        type: [ReviewSchema],
+        default: [
+            {
+                rating: 5,
+                comment: 'No comment',
+                user: 'No user'
+            },
+            {
+                rating: 2,
+                comment: 'No comment',
+                user: 'No user'
+            },
+            {
+                rating: 3,
+                comment: 'No comment',
+                user: 'No user'
+            },
+            {
+                rating: 4,
+                comment: 'No comment',
+                user: 'No user'
+            },
+        ]
+    },
     specialties: {
         type: Array,
         default: [
@@ -71,7 +106,6 @@ const UserSchema = new mongooose.Schema({
             'italian',
         ]
     },
-    // recipes: [RecipesSchema],
     recipes: {
         type: Array,
         default: [
@@ -104,7 +138,6 @@ const UserSchema = new mongooose.Schema({
             },
         ]
     },
-    // cart: [CartItemSchema],
     cart: {
         type: Array,
         default: [

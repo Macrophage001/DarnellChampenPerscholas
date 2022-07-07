@@ -27,3 +27,162 @@
     height: 100%;
     position: relative;
 }
+
+.full-chef-preview {
+    position: absolute;
+
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+
+    width: 100%;
+    height: 100vh;
+
+    z-index: 10;
+}
+
+.full-chef-preview-card {
+    width: 45%;
+    height: 85%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    position: relative;
+}
+
+.full-chef-preview-card .full-chef-image {
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.full-chef-preview-card .full-chef-image img {
+    width: 20%;
+    border-radius: 50%;
+}
+
+.full-chef-preview-card-rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 2rem;
+    width: 100%;
+
+    position: relative;
+}
+
+.full-chef-preview-card-rating-review button {
+    border: none;
+    background: none;
+    cursor: pointer;
+
+    font-family: Cascadia Code, sans-serif;
+    font-size: 1rem;
+    font-weight: lighter;
+    margin: 0;
+}
+
+.full-chef-preview-card-rating-review button:hover {
+    color: #FF6B00;
+}
+
+.rating-star {
+    color: #FF6B00;
+}
+
+.rating-start-half {
+    background: linear-gradient(to right, #FF6B00 0%, #FF6B00 50%, #fff 50%, #fff 100%);
+}
+
+.full-chef-preview-card-recipes {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    padding: 0 1rem;
+
+    width: 85%;
+    height: 55%;
+    box-shadow: inset 0 0 10px #adadad;
+
+    overflow: hidden scroll;
+}
+
+.full-chef-preview-card-recipe {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+    padding: 0.5rem;
+}
+
+.full-chef-preview-card-recipe>* {
+    margin: 0.5rem;
+}
+
+.full-chef-preview-card-recipe p,
+.full-chef-preview-card-recipe h2,
+.full-chef-preview-card-recipe h3 {
+    font-family: Cascadia Code, sans-serif;
+    font-weight: lighter;
+}
+
+.full-chef-preview-card-recipe-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+}
+
+.full-chef-preview-card-recipe-image {
+    width: 25%;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.full-chef-preview-card-recipe-content-left {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.full-chef-preview-card-recipe-content-cta {
+    display: flex;
+    flex-direction: column;
+}
+
+.full-chef-preview-card-recipe-content-cta button {
+    width: 10rem;
+}
+
+.full-chef-preview-card-recipe-content-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 50%;
+    max-height: 75%;
+}
+
+.full-chef-preview-card-recipe-content-right div {
+    width: 100%;
+    overflow: hidden scroll;
+}
+
+.full-chef-preview-card-recipe-content-right ul li {
+    list-style: none;
+}
