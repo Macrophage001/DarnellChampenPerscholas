@@ -54,6 +54,7 @@ app.post('/', upload.single('image'), (req, resp, next) => {
             contentType: 'image/png'
         }
     }
+
     imageModel.create(obj, (err, item) => {
         if (err) {
             console.log(err);
