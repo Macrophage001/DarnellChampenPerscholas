@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { loginUser, signupUser } = require('../controllers/authenticationController');
 
 const router = require('express').Router();
 const upload = require('../multerSetup');
@@ -12,9 +13,6 @@ router.route('/upload')
             data: encodedImage,
             contentType: req.file.mimetype,
         };
-        // Run database function.
-        // const response = await Image.create(encodedImageData, { new: true });
-        // const response = await User.findByIdAndUpdate(userId, { avatar: encodedImageData }, { new: true });
         res.send(encodedImageData);
     })
     .get((req, res) => {
@@ -23,5 +21,10 @@ router.route('/upload')
         // Send the image back to the client.
         res.send(`data:${img.contentType};base64,${Buffer.from(img.data, 'base64').toString('base64')}`);
     });
+
+router.route('/login')
+    .post(loginUser);
+router.route('/signup')
+    .post(signupUser);
 
 module.exports = router;

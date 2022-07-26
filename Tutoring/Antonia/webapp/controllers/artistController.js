@@ -10,8 +10,7 @@ const addArtwork = async (req, res) => {
     const encodedImage = Buffer.from(img, 'base64');
 
     const artwork = {
-        id: // Create a new id
-            data: encodedImage,
+        data: encodedImage,
         contentType: req.file.mimetype,
         ...req.body,
     };
@@ -19,7 +18,7 @@ const addArtwork = async (req, res) => {
     const artist = await Artist.findById(req.query.artistId);
     const newArtworks = [...artist.artworks, artwork];
     await Artist.findByIdAndUpdate(req.query.artistId, { artworks: newArtworks }, { new: true });
-};
+}
 
 /**
  * @description - This function is used to update an existing piece of artwork from the artist's collection.

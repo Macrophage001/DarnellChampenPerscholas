@@ -360,3 +360,410 @@ class ArrayExtension extends Array {
 //         }
 //     }, 5000);
 // })();
+
+
+const testCase2 = [1, 5, 12, 2, 51, 67, 1215, 2, 1285, 12, 123, 29, 52913, -2313, 1024, -1294, -92356];
+// [1, 5, 12], [2, 51, 67]
+// [0, 0, 0], [0, 0, 0]
+
+const merge = (left, right) => {
+    const result = [];
+    while (left.length && right.length) {
+        if (left[0] < right[0]) {
+            result.push(left.shift());
+        } else {
+            result.push(right.shift());
+        }
+    }
+    return [...result, ...left, ...right];
+}
+
+const mergeSort = (arr) => {
+    if (arr.length < 2) {
+        return arr;
+    } else {
+        const mid = Math.floor(arr.length / 2);
+        const left = arr.slice(0, mid);
+        const right = arr.slice(mid);
+        return merge(mergeSort(left), mergeSort(right));
+    }
+}
+
+const mergeSortMultipleArrays = (...arrs) => {
+    if (arrs.length < 2) {
+        return arrs[0];
+    } else {
+        const mid = Math.floor(arrs.length / 2);
+        const left = arrs.slice(0, mid);
+        const right = arrs.slice(mid);
+        return merge(mergeSortMultipleArrays(...left), mergeSortMultipleArrays(...right));
+    }
+}
+
+// console.log(mergeSortMultipleArrays([1, 5, 12], [2, 51, 67], [2, 51, 67]));
+
+const countSmaller = (nums) => {
+    let counts = [];
+    let sortedNums = mergeSort(nums);
+    for (let i = 0; i < nums.length; i++) {
+        let idx = sortedNums.indexOf(nums[i]);
+        counts.push(idx);
+        sortedNums.splice(idx, 1);
+    }
+    return counts;
+}
+
+// console.log(countSmaller([5, 2, 6, 1]));
+
+const searchMatrix = (matrix, target) => {
+    if (matrix.length === 0) {
+        return false;
+    }
+    let row = 0;
+    let col = matrix[0].length - 1;
+    while (row < matrix.length && col >= 0) {
+        if (matrix[row][col] === target) {
+            return true;
+        } else if (matrix[row][col] > target) {
+            col--; // Move up.
+        } else {
+            row++; // Move right.
+        }
+    }
+    return false;
+}
+
+const binarySearchMatrix = (matrix, target) => {
+    let m = matrix.length;
+    let n = matrix[0].length;
+
+    let lo = 0;
+    let hi = 0;
+    let mid = 0;
+
+    for (let i = 0; i < m; i++) {
+        if (matrix[i][0] <= target && matrix[i][n - 1] >= target) {
+            lo = 0;
+            hi = n - 1;
+            if (lo === hi && matrix[i][lo] === target) {
+                return true;
+            }
+            while (lo < hi) {
+                mid = Math.floor((lo + hi) / 2);
+                if (matrix[i][mid] === target) {
+                    return true;
+                } else if (matrix[i][mid] < target) {
+                    lo = mid + 1;
+                } else {
+                    hi = mid - 1;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+// console.log(binarySearchMatrix([[1, 4, 7, 11, 15], [2, 5, 8, 12, 19], [3, 6, 9, 16, 22], [10, 13, 14, 17, 24], [18, 21, 23, 26, 30]], 20));
+
+const BFS = (grid, start, end) => {
+    let queue = [start];
+    let visited = new Set();
+    while (queue.length) {
+        let curr = queue.shift();
+        if (curr.equals(end)) {
+            return true;
+        }
+        let neighbors = curr.neighbors(grid);
+        for (let neighbor of neighbors) {
+            if (!visited.has(neighbor)) {
+                visited.add(neighbor);
+                queue.push(neighbor);
+            }
+        }
+    }
+    return false;
+}
+
+const findMedianSortedArrays = (nums1, nums2) => {
+    let mergedArray = [...nums1, ...nums2].sort((a, b) => a - b);
+    let mid = Math.floor(mergedArray.length / 2);
+    if (mergedArray.length % 2 === 0) {
+        return (mergedArray[mid] + mergedArray[mid - 1]) / 2;
+    } else {
+        return mergedArray[mid];
+    }
+}
+
+// console.log(findMedianSortedArrays([1, 3], [2]));
+
+const myAtoi = (s) => {
+    let result = 0;
+    let sign = 1;
+    let i = 0;
+    while (s[i] === ' ') {
+        i++;
+    }
+    if (s[i] === '+') {
+        i++;
+    } else if (s[i] === '-') {
+        sign = -1;
+        i++;
+    }
+    while (i < s.length && s[i] >= '0' && s[i] <= '9') {
+        result = result * 10 + (s[i] - '0');
+        if (result * sign > 2147483647) {
+            return 2147483647;
+        } else if (result * sign < -2147483648) {
+            return -2147483648;
+        }
+        i++;
+    }
+    return result * sign;
+}
+
+const lengthOfNumber = (num) => {
+    if (num === 0) {
+        return 1;
+    } else if (num < 0) {
+        return lengthOfNumber(-num) + 1;
+    } else {
+        let result = 0;
+        while (num > 0) {
+            num = Math.floor(num / 10);
+            result++;
+        }
+        return result;
+    }
+}
+
+const mergeTwoSortedArrays = (nums1, nums2) => {
+    let result = [];
+    let i = 0;
+    let j = 0;
+    while (i < nums1.length && j < nums2.length) {
+        if (nums1[i] < nums2[j]) {
+            result.push(nums1[i]);
+            i++;
+        } else {
+            result.push(nums2[j]);
+            j++;
+        }
+    }
+    while (i < nums1.length) {
+        result.push(nums1[i]);
+        i++;
+    }
+    while (j < nums2.length) {
+        result.push(nums2[j]);
+        j++;
+    }
+    return result;
+}
+
+class PriorityQueue {
+    constructor() {
+        this.heap = [];
+    }
+
+    insert(val) {
+        this.heap.push(val);
+        this.bubbleUp();
+    }
+
+    pull() {
+        let result = this.heap[0];
+        this.heap[0] = this.heap[this.heap.length - 1];
+        this.heap.pop();
+        this.bubbleDown();
+        return result;
+    }
+
+    peek() {
+        return this.heap[0];
+    }
+
+    bubbleUp() {
+        let i = this.heap.length - 1;
+        while (i > 0) {
+            let parent = Math.floor((i - 1) / 2);
+            console.log("Parent Index: " + parent);
+            if (this.heap[i] > this.heap[parent]) {
+                let temp = this.heap[i];
+                this.heap[i] = this.heap[parent];
+                this.heap[parent] = temp;
+                i = parent;
+            } else {
+                break;
+            }
+        }
+    }
+
+    bubbleDown() {
+        let i = 0;
+        while (i < this.heap.length) {
+            let left = 2 * i + 1;
+            let right = 2 * i + 2;
+            let largest = i;
+            if (left < this.heap.length && this.heap[left] > this.heap[largest]) {
+                largest = left;
+            }
+            if (right < this.heap.length && this.heap[right] > this.heap[largest]) {
+                largest = right;
+            }
+            if (largest !== i) {
+                let temp = this.heap[i];
+                this.heap[i] = this.heap[largest];
+                this.heap[largest] = temp;
+                i = largest;
+            } else {
+                break;
+            }
+        }
+    }
+}
+
+let rangeOfRandomNumbers = (n) => {
+    let result = [];
+    let queue = new PriorityQueue();
+    for (let i = 0; i < n; i++) {
+        queue.insert(Math.floor(Math.random() * n));
+    }
+    console.log("Heap: ", queue.peek());
+
+    for (let i = 0; i < n; i++) {
+        result.push(queue.pull());
+    }
+    return result;
+}
+
+const longestValidParentheses = (s) => {
+    console.time("longestValidParentheses");
+    let maxans = 0;
+    let dp = new Array(s.length).fill(0);
+    for (let i = 1; i < s.length; i++) {
+        if (s[i] === ')') {
+            if (s[i - 1] === '(') {
+                dp[i] = (i >= 2 ? dp[i - 2] : 0) + 2;
+            } else if (i - dp[i - 1] > 0 && s[i - dp[i - 1] - 1] === '(') {
+                dp[i] = dp[i - 1] + ((i - dp[i - 1]) >= 2 ? dp[i - dp[i - 1] - 2] : 0) + 2;
+            }
+            maxans = Math.max(maxans, dp[i]);
+        }
+    }
+    console.timeEnd("longestValidParentheses");
+    return maxans;
+}
+
+const longestValidParentheses2 = (s) => {
+    console.time('longestValidParentheses2');
+    let left = 0, right = 0, maxLength = 0;
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] === '(') {
+            left++;
+        } else {
+            right++;
+        }
+        if (left === right) {
+            maxLength = Math.max(maxLength, 2 * right);
+        } else if (right > left) {
+            left = right = 0;
+        }
+    }
+    left = right = 0;
+    for (let i = s.length - 1; i >= 0; i--) {
+        if (s[i] === '(') {
+            left++;
+        } else {
+            right++;
+        }
+        if (left === right) {
+            maxLength = Math.max(maxLength, 2 * left);
+        } else if (left > right) {
+            left = right = 0;
+        }
+    }
+    console.timeEnd('longestValidParentheses2');
+    return maxLength;
+}
+
+const generateRangeOfParentheses = (n) => {
+    let result = [];
+    for (let i = 0; i < n; i++) {
+        Math.random() > 0.5 ? result.push('(') : result.push(')');
+    }
+    return result;
+}
+
+const binarySearch = (nums, target) => {
+    let low = 0;
+    let high = nums.length - 1;
+    while (low <= high) {
+        let mid = Math.floor(low + (high - low) / 2);
+        if (nums[mid] === target) {
+            return mid;
+        } else if (nums[mid] < target) {
+            low = mid + 1;
+        } else {
+            high = mid - 1;
+        }
+    }
+    return -1;
+}
+
+const findStartingAndEndingIndex = (nums, target) => {
+    if (!nums.includes(target)) return [-1, -1];
+    let map = {};
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] === target) {
+            if (!map[target]) {
+                map[target] = [i];
+            } else {
+                map[target].push(i);
+            }
+        }
+    }
+    return [map[target][0], map[target][map[target].length - 1]];
+}
+
+const findStartingAndEndingIndex2 = (nums, target) => {
+    console.time('findStartingAndEndingIndex2');
+    if (!nums.includes(target)) return [-1, -1];
+    let first = nums.indexOf(target);
+    let last = 0;
+    for (let i = nums.length - 1; i >= 0; i--) {
+        if (nums[i] === target) {
+            last = i;
+            break;
+        }
+    }
+    console.timeEnd('findStartingAndEndingIndex2');
+    return [first, last];
+}
+
+// let nums = [15, 7, 7, 8, 8, 121];
+// let target = 8;
+// console.log(findStartingAndEndingIndex(nums, target));
+
+const fibGood = (n, memo = {}) => {
+    if (n in memo) return memo[n];
+    if (n <= 2) return 1;
+    memo[n] = fibGood(n - 1, memo) + fibGood(n - 2, memo);
+    return memo[n];
+}
+const fibBad = (n) => {
+    if (n <= 2) return 1;
+    return fibBad(n - 1) + fibBad(n - 2);
+}
+
+// console.log(fibBad(50));
+
+const gridTraveler = (m, n, memo = {}) => {
+    const key = `${m},${n}`;
+    if (key in memo) return memo[key];
+    if (m === 1 && n === 1) return 1;
+    if (m === 0 || n === 0) return 0;
+    memo[key] = gridTraveler(m - 1, n, memo) + gridTraveler(m, n - 1, memo);
+    return memo[key];
+}
+
+console.log(gridTraveler(18, 18));
